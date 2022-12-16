@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: task-tracker
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task_tracker
+    username: task_tracker_db_client
+    password: task_tracker_db_client
+  liquibase:
+    enabled: true
+    change-log: classpath:db/scripts/changelog-master.xml
+    url: jdbc:postgresql://localhost:5432/task_tracker
+    user: task_tracker_db_admin
+    password: task_tracker_db_admin
+    liquibase-schema: "liquibase"
+    default-schema: "task_tracker"
+  jackson:
+    default-property-inclusion: non_null
