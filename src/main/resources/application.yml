@@ -7,7 +7,7 @@ spring:
     password: task_tracker_db_client
   liquibase:
     enabled: true
-    change-log: classpath:db/scripts/changelog-master.xml
+    change-log: classpath:scripts/changelog-master.xml
     url: jdbc:postgresql://localhost:5432/task_tracker
     user: task_tracker_db_admin
     password: task_tracker_db_admin
