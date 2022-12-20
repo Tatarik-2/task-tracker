@@ -25,7 +25,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryEntity findById(String id) {
-        return deliveryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Delivery not found, id: " + id));
+        return deliveryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + id));
     }
 
     @Override

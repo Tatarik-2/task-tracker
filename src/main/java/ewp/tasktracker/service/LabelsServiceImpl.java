@@ -22,7 +22,7 @@ public class LabelsServiceImpl implements LabelsService {
 
     @Override
     public LabelsEntity findById(String id) {
-        return labelsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Release not found, id: " + id));
+        return labelsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + id));
     }
 
     @Override
