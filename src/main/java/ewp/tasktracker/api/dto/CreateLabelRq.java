@@ -2,6 +2,7 @@ package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.LabelsEntity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class CreateLabelRq {
@@ -9,8 +10,8 @@ public class CreateLabelRq {
     private String author_id;
 
     private String task_id;
-    private Date created_at;
-    private Date updated_at;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
     public LabelsEntity toEntity() {
         return new LabelsEntity(
