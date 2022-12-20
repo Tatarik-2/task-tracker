@@ -30,4 +30,4 @@ COMMENT ON COLUMN HISTORIES.CREATED_AT IS 'Дата создания запис�
 COMMENT ON COLUMN HISTORIES.UPDATED_AT IS 'Дата обновления записи';
 
 
---rollback DROP TABLE DELIVERIES;
+--rollback DROP TABLE HISTORIES;
