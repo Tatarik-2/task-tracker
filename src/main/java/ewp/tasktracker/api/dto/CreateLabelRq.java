@@ -5,7 +5,6 @@ import ewp.tasktracker.entity.LabelsEntity;
 import java.util.Date;
 
 public class CreateLabelRq {
-    private String id;
     private String text;
     private String author_id;
 
@@ -15,7 +14,6 @@ public class CreateLabelRq {
 
     public LabelsEntity toEntity() {
         return new LabelsEntity(
-                this.id,
         this.text,
         this.author_id,
         this.task_id,

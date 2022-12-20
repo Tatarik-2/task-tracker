@@ -14,7 +14,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity(name = "labels")
 public class LabelsEntity extends BaseEntity {
-    private String id;
     private String text;
     private String author_id;
     private String task_id;
