@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Getter
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class LabelsEntity extends BaseEntity {
     private String author_id;
     private String task_id;
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date created_at;
+    private LocalDateTime created_at;
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date updated_at;
+    private LocalDateTime updated_at;
 }
