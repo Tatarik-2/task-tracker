@@ -1,6 +1,8 @@
 package ewp.tasktracker.entity;
 
 
+import ewp.tasktracker.service.PriorityEnum;
+import ewp.tasktracker.service.StatusEnum2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,15 +33,17 @@ public class HistoryEntity extends BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public HistoryEntity(String name, String description, String status, String priority,
+    public HistoryEntity(String name, String description, StatusEnum2 status, PriorityEnum priority,
                          String epicId, String authorId, String sprintId) {
         this.name = name;
         this.description = description;
-        this.status = status;
-        this.priority = priority;
+        this.status = status.toString();
+        this.priority = priority.toString();
         this.epicId = epicId;
         this.authorId = authorId;
         this.sprintId = sprintId;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
 
     }
 }

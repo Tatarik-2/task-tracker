@@ -1,15 +1,15 @@
 package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
-import ewp.tasktracker.entity.HistoryEntity;
+import ewp.tasktracker.api.dto.HistoryDto;
 
 import java.util.List;
 
 public interface HistoryService {
-    HistoryEntity saveHistory(CreateHistoryRq dto);
+    HistoryDto saveHistory(CreateHistoryRq dto);
 
-    HistoryEntity findHistoryById(String id);
+    HistoryDto findHistoryById(String id);
 
-    List<HistoryEntity> findAllHistories();
+    List<HistoryDto> findAllHistories();
 
 }
