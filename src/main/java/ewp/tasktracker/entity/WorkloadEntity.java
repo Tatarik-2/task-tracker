@@ -5,22 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "workloads")
 public class WorkloadEntity extends BaseEntity{
-    private String id;
+
     private String name;
     private String status;
     private String author_id;
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date created_at;
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date updated_at;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
 }

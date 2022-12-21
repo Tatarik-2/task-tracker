@@ -1,13 +1,14 @@
 package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateWorkloadRq;
-import ewp.tasktracker.entity.WorkloadEntity;
+import ewp.tasktracker.api.dto.WorkloadDto;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.WorkloadRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -16,17 +17,18 @@ public class WorkloadServiceImpl implements WorkloadService {
     private final WorkloadRepository workloadRepository;
 
     @Override
-    public WorkloadEntity save(CreateWorkloadRq dto) {
-        return workloadRepository.save(dto.toEntity());
+    public WorkloadDto create(CreateWorkloadRq dto) {
+        return new WorkloadDto(workloadRepository.save(dto.toEntity()));
     }
 
     @Override
-    public WorkloadEntity findById(String id) {
-        return workloadRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Release not found, id: " + id));
+    public WorkloadDto findById(String id) {
+        return new WorkloadDto(workloadRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Workload not found, id: " + id)));
     }
 
     @Override
-    public List<WorkloadEntity> findAll() {
-        return workloadRepository.findAll();
+    public List<WorkloadDto> findAll() {
+        return workloadRepository.findAll().stream().map(WorkloadDto::new).collect(Collectors.toList());
     }
 }
