@@ -1,6 +1,7 @@
 package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.CreateWorkloadRq;
+import ewp.tasktracker.api.dto.UpdateWorkloadRq;
 import ewp.tasktracker.api.dto.WorkloadDto;
 import ewp.tasktracker.service.WorkloadService;
 import io.swagger.annotations.Api;
@@ -57,6 +58,19 @@ public class WorkloadController {
     })
     public ResponseEntity<WorkloadDto> create(@Valid @RequestBody CreateWorkloadRq dto) {
         WorkloadDto workloadDto = workloadService.create(dto);
+        return ResponseEntity.ok(workloadDto);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Редактировать рабочее пространство", response = WorkloadDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
+            @ApiResponse(code = 422, message = "Ошибка валидации"),
+            @ApiResponse(code = 404, message = "Сущность для обновления не найдена")
+    })
+    public ResponseEntity<WorkloadDto> update(@Valid @RequestBody UpdateWorkloadRq dto) {
+        WorkloadDto workloadDto = workloadService.update(dto);
         return ResponseEntity.ok(workloadDto);
     }
 }
