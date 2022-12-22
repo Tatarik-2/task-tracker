@@ -21,14 +21,14 @@ public class CreateCommentRq {
     @NotBlank
     private String taskId;
     public CommentEntity toEntity() {
-        return new CommentEntity(this);
+        return new CommentEntity(this.text, this.taskId);
     }
 
     @Override
     public String toString() {
         return "{" +
                 "\"text\":\"" + text + '\"' +
-                ", \"taskId=\"" + taskId + '\"' +
+                ", \"taskId\":\"" + taskId + '\"' +
                 '}';
     }
 }

@@ -27,8 +27,8 @@ public class CommentEntity extends BaseEntity {
     private LocalDateTime updatedAd;
     @Column(name = "task_id")
     private String taskId;
-    public CommentEntity(CreateCommentRq entity) {
-        this.text = entity.getText();
-        this.taskId = entity.getTaskId();
+    public CommentEntity(String text, String taskId) {
+        this.text = text;
+        this.taskId = taskId;
     }
 }

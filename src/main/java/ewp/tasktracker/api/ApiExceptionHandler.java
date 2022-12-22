@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 @Slf4j
 public class ApiExceptionHandler {
-
     @ExceptionHandler
     public ResponseEntity<ErrorDto> handleResourceNotFoundException(ResourceNotFoundException e) {
         log.error(e.getMessage());
