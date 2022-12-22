@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
 import ewp.tasktracker.api.dto.HistoryDto;
+import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.HistoryRepository;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,22 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<HistoryDto> findAllHistories() {
         return historyRepository.findAll().stream().map(HistoryDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public HistoryDto updateHistory(HistoryDto dto) {
+        HistoryEntity historyEntityOld = historyRepository.findById(dto.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("History not found, id: " + dto.getId()));
+        HistoryEntity historyEntityNew = new HistoryEntity();
+        historyEntityNew.setId(historyEntityOld.getId());
+        historyEntityNew.setCreatedAt(historyEntityOld.getCreatedAt());
+        historyEntityNew.setName(dto.getName());
+        historyEntityNew.setDescription(dto.getDescription());
+        historyEntityNew.setStatus(dto.getStatus().toString());
+        historyEntityNew.setPriority(dto.getPriority().toString());
+        historyEntityNew.setEpicId(dto.getEpicId());
+        historyEntityNew.setAuthorId(dto.getAuthorId());
+        historyEntityNew.setSprintId(dto.getSprintId());
+        return new HistoryDto(historyRepository.save(historyEntityNew));
     }
 }

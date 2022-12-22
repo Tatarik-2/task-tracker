@@ -60,4 +60,19 @@ public class HistoryController {
         }
         return ResponseEntity.ok(historyService.saveHistory(dto));
     }
+
+    @PutMapping
+    @ApiOperation(value = "Обновить историю", response = HistoryDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<HistoryDto> updateHistory(@Validated @RequestBody HistoryDto dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            throw new UnprocessableEntity(bindingResult.toString());
+        }
+        return ResponseEntity.ok(historyService.updateHistory(dto));
+    }
 }

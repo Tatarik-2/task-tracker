@@ -12,4 +12,6 @@ public interface HistoryService {
 
     List<HistoryDto> findAllHistories();
 
+    HistoryDto updateHistory(HistoryDto dto);
+
 }
