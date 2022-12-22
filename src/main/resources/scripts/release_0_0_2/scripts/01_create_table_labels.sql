@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset zalyalov-na:create_table_workloads rollbackSplitStatements:true
+--changeset tokarev-as:create_table_labels rollbackSplitStatements:true
 --comment: Создание таблицы рабочих пространств
 CREATE TABLE LABELS
 (

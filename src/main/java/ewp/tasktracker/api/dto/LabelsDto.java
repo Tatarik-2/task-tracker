@@ -23,7 +23,5 @@ public class LabelsDto {
         this.id = labelsEntity.getId();
         this.text = labelsEntity.getText();
         this.author_id = labelsEntity.getAuthor_id();
-        this.created_at = labelsEntity.getCreated_at();
-        this.updated_at = labelsEntity.getUpdated_at();
     }
 }

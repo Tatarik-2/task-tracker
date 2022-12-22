@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
 
 
@@ -18,8 +16,14 @@ public class LabelsEntity extends BaseEntity {
     private String text;
     private String author_id;
     private String task_id;
-    @Temporal(value = TemporalType.TIMESTAMP)
     private LocalDateTime created_at;
-    @Temporal(value = TemporalType.TIMESTAMP)
     private LocalDateTime updated_at;
+
+    public LabelsEntity(String text, String author_id, String task_id){
+        this.text = text;
+        this.author_id = author_id;
+        this.task_id = task_id;
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
+    }
 }

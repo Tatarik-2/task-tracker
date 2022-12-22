@@ -1,25 +1,33 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.LabelsEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateLabelRq {
+    @NotEmpty
+    @Size(max = 64)
     private String text;
+    @NotEmpty
+    @Size(max = 36)
     private String author_id;
 
+    @NotEmpty
+    @Size(max = 36)
     private String task_id;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
 
     public LabelsEntity toEntity() {
         return new LabelsEntity(
         this.text,
         this.author_id,
-        this.task_id,
-        this.created_at,
-        this.updated_at
+        this.task_id
         );
     }
 }
