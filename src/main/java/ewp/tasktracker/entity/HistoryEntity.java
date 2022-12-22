@@ -20,9 +20,9 @@ public class HistoryEntity extends BaseEntity {
 
     private String description;
 
-    private String status; //TODO, IN PROGRESS, DONE - реализовать через ENUM ?
+    private String status;
 
-    private String priority; //TODO LOW, MEDIUM, HIGH - реализовать ENUM
+    private String priority;
 
     private String epicId;
 
