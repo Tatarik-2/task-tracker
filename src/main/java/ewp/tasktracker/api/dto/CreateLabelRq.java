@@ -24,10 +24,6 @@ public class CreateLabelRq {
     private String task_id;
 
     public LabelsEntity toEntity() {
-        return new LabelsEntity(
-        this.text,
-        this.author_id,
-        this.task_id
-        );
+        return new LabelsEntity();
     }
 }
