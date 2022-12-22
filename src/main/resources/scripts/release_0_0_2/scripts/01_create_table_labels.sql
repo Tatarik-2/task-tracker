@@ -28,4 +28,4 @@ COMMENT
 ON COLUMN WORKLOADS.UPDATED_AT IS 'Дата обновления записи';
 
 
--- rollback DROP TABLE WORKLOADS;
+-- rollback DROP TABLE LABELS;
