@@ -4,11 +4,14 @@ import ewp.tasktracker.api.dto.CreateTaskRq;
 import ewp.tasktracker.api.dto.TaskDto;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@AllArgsConstructor
+@Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
