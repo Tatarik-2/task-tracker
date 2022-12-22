@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/release",
-        produces = {MediaType.APPLICATION_JSON_VALUE},
-        consumes = {MediaType.APPLICATION_JSON_VALUE})
+        produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 @Api(value = "task-tracker", tags = {"release"})
 public class ReleaseController {

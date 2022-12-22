@@ -1,0 +1,26 @@
+--liquibase formatted sql
+
+--changeset davydov-pm:create_table_projects rollbackSplitStatements:true
+--comment: Создание таблицы проектов
+CREATE TABLE PROJECTS
+(
+    ID   VARCHAR(36) PRIMARY KEY,
+    NAME VARCHAR(128) NOT NULL,
+    DESCRIPTION VARCHAR(128),
+    STATUS VARCHAR(18) NOT NULL,
+    WORKLOAD_ID VARCHAR(36),
+    AUTHOR_ID VARCHAR (36) NOT NULL,
+    CREATED_AT TIMESTAMP NOT NULL,
+    UPDATED_AT TIMESTAMP NOT NULL
+);
+
+COMMENT ON TABLE PROJECTS IS 'Проект';
+COMMENT ON COLUMN PROJECTS.ID IS 'Идентификатор';
+COMMENT ON COLUMN PROJECTS.NAME IS 'Наименование';
+COMMENT ON COLUMN PROJECTS.DESCRIPTION IS 'Описание';
+COMMENT ON COLUMN PROJECTS.STATUS IS 'Статус';
+COMMENT ON COLUMN PROJECTS.AUTHOR_ID IS 'Идентификатор автора';
+COMMENT ON COLUMN PROJECTS.CREATED_AT IS 'Дата создания записи';
+COMMENT ON COLUMN PROJECTS.UPDATED_AT IS 'Дата обновления записи';
+
+--rollback DROP TABLE DELIVERIES;
