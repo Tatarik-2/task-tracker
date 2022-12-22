@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeset tokarev-as:create_table_labels rollbackSplitStatements:true
---comment: Создание таблицы рабочих пространств
+--comment: Создание таблицы меток задачи
 CREATE TABLE LABELS
 (
     ID         VARCHAR(36) PRIMARY KEY,
