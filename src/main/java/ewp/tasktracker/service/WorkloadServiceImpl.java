@@ -7,10 +7,11 @@ import ewp.tasktracker.entity.WorkloadEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.WorkloadRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -31,8 +32,10 @@ public class WorkloadServiceImpl implements WorkloadService {
     }
 
     @Override
-    public List<WorkloadDto> findAll() {
-        return workloadRepository.findAll().stream().map(WorkloadDto::new).collect(Collectors.toList());
+    public List<WorkloadDto> findAll(Optional<Integer> pageSize, Integer pageNumber) {
+        int size = pageSize.get()>40?40:pageSize.get();
+        return workloadRepository.findAll(PageRequest.of(pageNumber, size))
+                .stream().map(WorkloadDto::new).collect(Collectors.toList());
     }
 
     @Override
