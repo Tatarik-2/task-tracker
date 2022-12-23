@@ -6,12 +6,12 @@ CREATE TABLE epics
 (
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
-    description VARCHAR(256) NOT NULL, --desc занято под сортировку по убыванию
+    description VARCHAR(256) NOT NULL,
     status VARCHAR(18) NOT NULL,
     priority VARCHAR(18) NOT NULL,
     project_id VARCHAR(36) NOT NULL,
     author_id VARCHAR(36) NOT NULL,
-    supersprint_id VARCHAR(36), --может быть null (судя по всему)
+    supersprint_id VARCHAR(36), --может быть null (судя по тз)
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );

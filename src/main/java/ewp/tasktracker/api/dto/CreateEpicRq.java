@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.EpicEntity;
-import ewp.tasktracker.entity.Priority;
-import ewp.tasktracker.entity.Status;
+import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

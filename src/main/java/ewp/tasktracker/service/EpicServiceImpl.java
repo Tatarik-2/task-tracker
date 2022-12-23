@@ -30,10 +30,10 @@ public class EpicServiceImpl implements EpicService{
 //        return null;
 //    }
 
-    @Override
-    public List<EpicDto> findAllEpics() {
-        return epicRepository.findAll(PageRequest.of(1, 2)).stream().map(EpicDto::new).collect(Collectors.toList());
-    }
+//    @Override
+//    public List<EpicDto> findAllEpics() {
+//        return epicRepository.findAll(PageRequest.of(1, 2)).stream().map(EpicDto::new).collect(Collectors.toList());
+//    }
 
     @Override
     public EpicDto findEpicById(String id) {

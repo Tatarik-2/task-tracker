@@ -13,7 +13,7 @@ public interface EpicService {
 
 //    EpicEntity update(String id, EpicDto epicDto);
 
-    List<EpicDto> findAllEpics();
+//    List<EpicDto> findAllEpics();
 
     EpicDto findEpicById(String id);
 }
