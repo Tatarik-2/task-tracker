@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.HistoryEntity;
-import ewp.tasktracker.service.PriorityEnum;
-import ewp.tasktracker.service.StatusEnum2;
+import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +21,8 @@ public class CreateHistoryRq {
     @NotEmpty
     @Size(max = 256)
     private String description;
-    private StatusEnum2 status;
-    private PriorityEnum priority;
+    private Status status;
+    private Priority priority;
     @NotEmpty
     @Size(max = 36)
     private String epicId;
