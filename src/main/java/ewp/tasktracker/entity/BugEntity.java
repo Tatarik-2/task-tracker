@@ -24,6 +24,8 @@ public class BugEntity extends BaseEntity {
     private String authorId;
     @Column(name = "assignee_id")
     private String assigneeId;
+    @Column(name = "sprint_id")
+    private String sprintId;
     @Column(name = "created_at")
     private LocalDate createdAt;
     @Column(name = "updated_at")

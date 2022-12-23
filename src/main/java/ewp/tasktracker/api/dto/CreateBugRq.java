@@ -32,11 +32,14 @@ public class CreateBugRq {
     @NotNull
     @Size(max = 36)
     private String assigneeId;
+    @NotNull
+    @Size(max = 36)
+    private String sprintId;
 
     public BugEntity toEntity() {
         return new BugEntity(
                 this.name, this.desc, this.status.toString(), this.priority.toString(),
-                this.historyId, this.authorId, this.assigneeId,
+                this.historyId, this.authorId, this.assigneeId, this.sprintId,
                 LocalDate.now(), LocalDate.now());
     }
 }

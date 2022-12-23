@@ -17,6 +17,7 @@ public class BugDto {
     private String historyId;
     private String authorId;
     private String assigneeId;
+    private String sprintId;
 
     public BugDto(BugEntity bugEntity) {
         this.name = bugEntity.getName();
@@ -26,5 +27,6 @@ public class BugDto {
         this.historyId = bugEntity.getHistoryId();
         this.authorId = bugEntity.getAuthorId();
         this.assigneeId = bugEntity.getAssigneeId();
+        this.sprintId = bugEntity.getSprintId();
     }
 }
