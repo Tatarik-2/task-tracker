@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/history",
-        produces = {MediaType.APPLICATION_JSON_VALUE}) //, consumes = {MediaType.APPLICATION_JSON_VALUE}
+        produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 @Api(value = "task-tracker", tags = {"history"})
 public class HistoryController {
