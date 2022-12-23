@@ -18,31 +18,32 @@ public class CreateTaskRq {
     private String name;
     @NotNull
     @Size(min = 3, max = 256)
-    private String desc;
+    private String DESCRIPTION;
     @NotNull
     private String status;
     private String priority;
     @NotNull
     @Size(min = 3, max = 36)
-    private String history_id;
+    private String historyId;
     @NotNull
     @Size(min = 3, max = 36)
-    private String author_id;
+    private String authorId;
     @NotNull
+
     @Size(min = 3, max = 36)
-    private String assignee_id;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private String assigneeId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public TaskEntity toEntity() {
         return new TaskEntity(
                 this.name,
-                this.desc,
+                this.DESCRIPTION,
                 this.status,
                 this.priority,
-                this.history_id,
-                this.author_id,
-                this.assignee_id,
+                this.historyId,
+                this.authorId,
+                this.assigneeId,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );

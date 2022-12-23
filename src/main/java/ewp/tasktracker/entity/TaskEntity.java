@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
 
 
@@ -17,7 +15,7 @@ import java.time.LocalDateTime;
 public class TaskEntity extends BaseEntity {
 
     private String name;
-    private String desc;
+    private String DESCRIPTION;
     private String status;
     private String priority;
     private String history_id;
