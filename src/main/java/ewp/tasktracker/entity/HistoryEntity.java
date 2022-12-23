@@ -2,7 +2,7 @@ package ewp.tasktracker.entity;
 
 
 import ewp.tasktracker.entity.common.Priority;
-import ewp.tasktracker.entity.common.Status;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +12,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @Getter
@@ -25,9 +27,11 @@ public class HistoryEntity extends BaseEntity {
 
     private String description;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ProgressStatus status;
 
-    private String priority;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
     private String epicId;
 
@@ -42,12 +46,12 @@ public class HistoryEntity extends BaseEntity {
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
-    public HistoryEntity(String name, String description, Status status, Priority priority,
+    public HistoryEntity(String name, String description, ProgressStatus status, Priority priority,
                          String epicId, String authorId, String sprintId) {
         this.name = name;
         this.description = description;
-        this.status = status.toString();
-        this.priority = priority.toString();
+        this.status = status;
+        this.priority = priority;
         this.epicId = epicId;
         this.authorId = authorId;
         this.sprintId = sprintId;

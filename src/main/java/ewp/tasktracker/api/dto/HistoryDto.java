@@ -2,7 +2,7 @@ package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.entity.common.Priority;
-import ewp.tasktracker.entity.common.Status;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ public class HistoryDto {
     private String id;
     private String name;
     private String description;
-    private Status status;
+    private ProgressStatus status;
     private Priority priority;
     private String epicId;
     private String authorId;
@@ -24,8 +24,8 @@ public class HistoryDto {
         this.id = historyEntity.getId();
         this.name = historyEntity.getName();
         this.description = historyEntity.getDescription();
-        this.status = Status.valueOf(historyEntity.getStatus());
-        this.priority = Priority.valueOf(historyEntity.getPriority());
+        this.status = historyEntity.getStatus();
+        this.priority = historyEntity.getPriority();
         this.epicId = historyEntity.getEpicId();
         this.authorId = historyEntity.getAuthorId();
         this.sprintId = historyEntity.getSprintId();

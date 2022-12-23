@@ -2,7 +2,6 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
 import ewp.tasktracker.api.dto.HistoryDto;
-import ewp.tasktracker.exception.UnprocessableEntity;
 import ewp.tasktracker.service.HistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +10,6 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,10 +52,7 @@ public class HistoryController {
             @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<HistoryDto> createHistory(@Validated @RequestBody CreateHistoryRq dto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            throw new UnprocessableEntity(bindingResult.toString());
-        }
+    public ResponseEntity<HistoryDto> createHistory(@Validated @RequestBody CreateHistoryRq dto) {
         return ResponseEntity.ok(historyService.saveHistory(dto));
     }
 
