@@ -18,12 +18,15 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public HistoryDto saveHistory(CreateHistoryRq dto) {
-        return new HistoryDto(historyRepository.save(dto.toEntity()));
+        HistoryEntity historyEntity = historyRepository.save(dto.toEntity());
+        return new HistoryDto(historyEntity);
     }
 
     @Override
     public HistoryDto findHistoryById(String id) {
-        return new HistoryDto(historyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("History not found, id: " + id)));
+        HistoryEntity historyEntity = historyRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("History not found, id: " + id));
+        return new HistoryDto(historyEntity);
 
     }
 
