@@ -6,6 +6,8 @@ import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.EpicRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,10 +30,10 @@ public class EpicServiceImpl implements EpicService{
 //        return null;
 //    }
 
-//    @Override
-//    public List<EpicDto> findAll() {
-//        return epicRepository.findAll().stream().map(EpicDto::new).collect(Collectors.toList());
-//    }
+    @Override
+    public List<EpicDto> findAllEpics() {
+        return epicRepository.findAll(PageRequest.of(1, 2)).stream().map(EpicDto::new).collect(Collectors.toList());
+    }
 
     @Override
     public EpicDto findEpicById(String id) {

@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.EpicEntity;
-import ewp.tasktracker.service.PriorityEnum;
-import ewp.tasktracker.service.Status2Enum;
+import ewp.tasktracker.entity.Priority;
+import ewp.tasktracker.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +21,12 @@ public class CreateEpicRq {
     private String description;
 
 
-//    ------------No validator could be found for constraint
-//    'javax.validation.constraints.NotEmpty' validating type 'ewp.tasktracker.service.Status2Enum'.
-//    Check configuration for 'status'
-
 //    @NotEmpty
 //    @Size(max=18)
-    private Status2Enum status;
+    private Status status;
 //    @NotEmpty
 //    @Size(max=18)
-    private PriorityEnum priority;
+    private Priority priority;
     @NotEmpty
     @Size(max=36)
     private String projectId;

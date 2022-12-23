@@ -2,6 +2,10 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateEpicRq;
 import ewp.tasktracker.api.dto.EpicDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface EpicService {
 
@@ -9,7 +13,7 @@ public interface EpicService {
 
 //    EpicEntity update(String id, EpicDto epicDto);
 
-//    List<EpicDto> findAll();
+    List<EpicDto> findAllEpics();
 
     EpicDto findEpicById(String id);
 }
