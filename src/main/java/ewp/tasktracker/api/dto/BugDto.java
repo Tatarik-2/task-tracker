@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BugDto {
+    private String id;
     private String name;
-    private String desc;
+    private String description;
     private String status;
     private String priority;
     private String historyId;
@@ -20,8 +21,9 @@ public class BugDto {
     private String sprintId;
 
     public BugDto(BugEntity bugEntity) {
+        this.id = bugEntity.getId();
         this.name = bugEntity.getName();
-        this.desc = bugEntity.getDesc();
+        this.description = bugEntity.getDescription();
         this.status = bugEntity.getStatus();
         this.priority = bugEntity.getPriority();
         this.historyId = bugEntity.getHistoryId();

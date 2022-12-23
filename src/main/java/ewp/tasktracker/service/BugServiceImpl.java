@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.BugDto;
 import ewp.tasktracker.api.dto.CreateBugRq;
+import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,8 @@ public class BugServiceImpl implements BugService {
 
     @Override
     public BugDto create(CreateBugRq dto) {
-        return new BugDto(bugRepository.save(dto.toEntity()));
+        BugEntity entity = bugRepository.save(dto.toEntity());
+        return new BugDto(entity);
     }
 
     @Override

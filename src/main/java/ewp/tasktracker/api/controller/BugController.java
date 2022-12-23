@@ -35,7 +35,7 @@ public class BugController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Получить рабочее пространство по id", response = BugDto.class)
+    @ApiOperation(value = "Получить баг по id", response = BugDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
@@ -47,7 +47,7 @@ public class BugController {
     }
 
     @PostMapping
-    @ApiOperation(value = "Создать рабочее пространство", response = BugDto.class)
+    @ApiOperation(value = "Создать баг", response = BugDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
