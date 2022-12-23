@@ -28,7 +28,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto findById(String id) {
         return new TaskDto(taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Workload not found, id: " + id)));
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found, id: " + id)));
     }
 
     @Override
