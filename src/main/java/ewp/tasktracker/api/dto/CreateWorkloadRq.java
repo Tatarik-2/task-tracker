@@ -23,14 +23,14 @@ public class CreateWorkloadRq {
     private Status status;
     @NotNull
     @Size(min = 5, max = 36)
-    private String author_id;
+    private String authorId;
 
 
     public WorkloadEntity toEntity() {
         return new WorkloadEntity(
                 this.name,
                 this.status.toString(),
-                this.author_id,
+                this.authorId,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );

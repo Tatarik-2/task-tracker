@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 public class WorkloadDto {
     private String name;
     private String status;
-    private String author_id;
+    private String authorId;
 
     public WorkloadDto(WorkloadEntity workloadEntity) {
         this.name = workloadEntity.getName();
         this.status = workloadEntity.getStatus();
-        this.author_id = workloadEntity.getAuthor_id();
+        this.authorId = workloadEntity.getAuthorId();
     }
 }
