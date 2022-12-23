@@ -16,7 +16,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/epic",
         produces = {MediaType.APPLICATION_JSON_VALUE}
-//        consumes = {MediaType.APPLICATION_JSON_VALUE}
 )
 
 @AllArgsConstructor

@@ -36,7 +36,6 @@ public class EpicEntity extends BaseEntity {
     @Column(name = "supersprint_id")
     private String supersprintId;
 
-//    BaseEntity
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
