@@ -1,5 +1,5 @@
 package ewp.tasktracker.entity.common;
 
-public enum Status {
+public enum ProgressStatus {
     TODO, IN_PROGRESS, DONE
 }
