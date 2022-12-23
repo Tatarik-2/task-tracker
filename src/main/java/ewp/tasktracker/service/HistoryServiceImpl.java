@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
 import ewp.tasktracker.api.dto.HistoryDto;
+import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.HistoryRepository;
 import lombok.AllArgsConstructor;
@@ -17,12 +18,15 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public HistoryDto saveHistory(CreateHistoryRq dto) {
-        return new HistoryDto(historyRepository.save(dto.toEntity()));
+        HistoryEntity historyEntity = historyRepository.save(dto.toEntity());
+        return new HistoryDto(historyEntity);
     }
 
     @Override
     public HistoryDto findHistoryById(String id) {
-        return new HistoryDto(historyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("History not found, id: " + id)));
+        HistoryEntity historyEntity = historyRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("History not found, id: " + id));
+        return new HistoryDto(historyEntity);
 
     }
 
