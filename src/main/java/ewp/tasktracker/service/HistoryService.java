@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
 import ewp.tasktracker.api.dto.HistoryDto;
+import ewp.tasktracker.api.dto.UpdateHistoryRq;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface HistoryService {
 
     List<HistoryDto> findAllHistories();
 
-    HistoryDto updateHistory(HistoryDto dto);
+    HistoryDto updateHistory(UpdateHistoryRq dto);
 
 }

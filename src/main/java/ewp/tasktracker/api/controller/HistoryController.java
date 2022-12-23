@@ -2,6 +2,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.CreateHistoryRq;
 import ewp.tasktracker.api.dto.HistoryDto;
+import ewp.tasktracker.api.dto.UpdateHistoryRq;
 import ewp.tasktracker.service.HistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -64,10 +65,7 @@ public class HistoryController {
             @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<HistoryDto> updateHistory(@Validated @RequestBody HistoryDto dto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
-            throw new UnprocessableEntity(bindingResult.toString());
-        }
+    public ResponseEntity<HistoryDto> updateHistory(@Validated @RequestBody UpdateHistoryRq dto) {
         return ResponseEntity.ok(historyService.updateHistory(dto));
     }
 }
