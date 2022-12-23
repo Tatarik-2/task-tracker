@@ -33,7 +33,7 @@ public class CommentController {
     }
 
     @PostMapping
-    @ApiOperation(value = "Схранить комментарий", response = CommentDto.class)
+    @ApiOperation(value = "Схранить", response = CommentDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Успешное создание комментария"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),

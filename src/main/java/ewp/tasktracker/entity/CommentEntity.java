@@ -20,10 +20,8 @@ import java.time.LocalDateTime;
 public class CommentEntity extends BaseEntity {
     private String text;
     @Column(name = "created_at")
-    @CreationTimestamp
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
-    @UpdateTimestamp
     private LocalDateTime updatedAd;
     @Column(name = "task_id")
     private String taskId;

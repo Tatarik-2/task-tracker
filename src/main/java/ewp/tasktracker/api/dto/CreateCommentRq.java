@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +23,12 @@ public class CreateCommentRq {
     @NotNull
     @NotBlank
     private String taskId;
+
     public CommentEntity toEntity() {
-        return new CommentEntity(this.text, this.taskId);
+        CommentEntity entity = new CommentEntity(this.text, this.taskId);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setUpdatedAd(LocalDateTime.now());
+        return entity;
     }
 
     @Override
