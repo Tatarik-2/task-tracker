@@ -20,12 +20,8 @@ public class CreateEpicRq {
     @Size(max=256)
     private String description;
 
-
-//    @NotEmpty
-//    @Size(max=18)
     private Status status;
-//    @NotEmpty
-//    @Size(max=18)
+
     private Priority priority;
     @NotEmpty
     @Size(max=36)
