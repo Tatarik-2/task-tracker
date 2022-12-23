@@ -10,6 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.persistence.RollbackException;
+
 @ControllerAdvice
 @Slf4j
 public class ApiExceptionHandler {
@@ -20,24 +22,25 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(new ErrorDto(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    //для перехвата исключений, возникающих когда поля не соответствуют ENUM
     @ExceptionHandler
-    public ResponseEntity<ErrorDto> handleUnprocessableEntity(HttpMessageNotReadableException e) {
+    public ResponseEntity<ErrorDto> handleRollbackException(RollbackException e) {
         log.error(e.getMessage());
-        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    //для перехвата исключений, возникающих при ошибочной валидации полей
-    @ExceptionHandler
-    public ResponseEntity<ErrorDto> handleUnprocessableEntity(MethodArgumentNotValidException e) {
-        log.error(e.getMessage());
-        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(), e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorDto> handleInternalServerError(Exception e) {
+    public ResponseEntity<ErrorDto> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage());
-        return new ResponseEntity<>(new ErrorDto(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        log.error(e.getMessage());
+        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
 }
