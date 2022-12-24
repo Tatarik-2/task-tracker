@@ -15,8 +15,8 @@ public class WorkloadEntity extends BaseEntity{
 
     private String name;
     private String status;
-    private String author_id;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private String authorId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }
