@@ -31,4 +31,5 @@ public class TaskDto {
         this.history_id = taskEntity.getHistory_id();
         this.author_id = taskEntity.getAuthor_id();
     }
+
 }

@@ -24,7 +24,6 @@ public class TaskEntity extends BaseEntity {
     private String author_id;
     private String assignee_id;
     private LocalDateTime created_at;
-
     private LocalDateTime updated_at;
 
 }

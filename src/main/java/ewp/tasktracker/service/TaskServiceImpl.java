@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
