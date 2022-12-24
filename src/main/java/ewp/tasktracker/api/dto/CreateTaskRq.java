@@ -1,6 +1,8 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.TaskEntity;
+import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +22,8 @@ public class CreateTaskRq {
     @Size(min = 3, max = 256)
     private String DESCRIPTION;
     @NotNull
-    private String status;
-    private String priority;
+    private ProgressStatus status;
+    private Priority priority;
     @NotNull
     @Size(min = 3, max = 36)
     private String historyId;

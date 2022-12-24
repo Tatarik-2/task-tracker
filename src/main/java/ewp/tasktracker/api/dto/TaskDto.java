@@ -1,6 +1,8 @@
 package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.TaskEntity;
+import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class TaskDto {
     private String id;
     private String name;
-    private String desc;
+    private String DESCRIPTION;
 
-    private String status;
-    private String priority;
+    private ProgressStatus status;
+    private Priority priority;
     private String history_id;
     private String author_id;
     private String assignee_id;
@@ -23,7 +25,7 @@ public class TaskDto {
     public TaskDto(TaskEntity taskEntity) {
         this.id = taskEntity.getId();
         this.name = taskEntity.getName();
-        this.desc = taskEntity.getDesc();
+        this.DESCRIPTION = taskEntity.getDESCRIPTION();
         this.status = taskEntity.getStatus();
         this.priority = taskEntity.getPriority();
         this.history_id = taskEntity.getHistory_id();

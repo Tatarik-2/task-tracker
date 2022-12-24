@@ -1,5 +1,7 @@
 package ewp.tasktracker.entity;
 
+import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,8 @@ public class TaskEntity extends BaseEntity {
 
     private String name;
     private String DESCRIPTION;
-    private String status;
-    private String priority;
+    private ProgressStatus status;
+    private Priority priority;
     private String history_id;
     private String author_id;
     private String assignee_id;

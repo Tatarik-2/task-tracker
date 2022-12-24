@@ -10,6 +10,7 @@ public interface TaskService {
     TaskDto create(CreateTaskRq dto);
 
     TaskDto findById(String id);
+
     List<TaskDto> findAll();
 }
 
