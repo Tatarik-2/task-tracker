@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/workload",
@@ -31,8 +30,8 @@ public class WorkloadController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<WorkloadDto>> getAll(@RequestParam (value = "pageSize", defaultValue = "20") Optional<Integer> pageSize,
-                                                    @Valid @RequestParam("pageNumber") Integer pageNumber) {
+    public ResponseEntity<List<WorkloadDto>> getAll(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+                                                    @RequestParam("pageNumber") Integer pageNumber) {
         List<WorkloadDto> workloads = workloadService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(workloads);
     }
