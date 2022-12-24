@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/delivery",
-        produces = {MediaType.APPLICATION_JSON_VALUE},
-        consumes = {MediaType.APPLICATION_JSON_VALUE})
+        produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 @Api(value = "task-tracker", tags = {"delivery"})
 public class DeliveryController {
