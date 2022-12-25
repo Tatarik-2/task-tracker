@@ -31,11 +31,8 @@ public class CreateTaskRq {
     @Size(min = 3, max = 36)
     private String authorId;
     @NotNull
-
     @Size(min = 3, max = 36)
     private String assigneeId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public TaskEntity toEntity() {
         return new TaskEntity(
@@ -45,9 +42,7 @@ public class CreateTaskRq {
                 this.priority,
                 this.historyId,
                 this.authorId,
-                this.assigneeId,
-                LocalDateTime.now(),
-                LocalDateTime.now()
+                this.assigneeId
         );
 
     }

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 
@@ -17,13 +19,17 @@ import java.time.LocalDateTime;
 public class TaskEntity extends BaseEntity {
 
     private String name;
-    private String DESCRIPTION;
+    private String description;
+    @Enumerated(EnumType.STRING)
     private ProgressStatus status;
+    @Enumerated(EnumType.STRING)
     private Priority priority;
-    private String history_id;
-    private String author_id;
-    private String assignee_id;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private String historyId;
+    private String authorId;
+    private String assigneeId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
+    public TaskEntity(String name, String description, ProgressStatus status, Priority priority, String historyId, String authorId, String assigneeId) {
+    }
 }

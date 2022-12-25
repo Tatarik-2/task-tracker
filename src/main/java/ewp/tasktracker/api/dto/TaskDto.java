@@ -14,22 +14,22 @@ import lombok.NoArgsConstructor;
 public class TaskDto {
     private String id;
     private String name;
-    private String DESCRIPTION;
+    private String description;
 
     private ProgressStatus status;
     private Priority priority;
-    private String history_id;
-    private String author_id;
-    private String assignee_id;
+    private String historyId;
+    private String authorId;
+    private String assigneeId;
 
     public TaskDto(TaskEntity taskEntity) {
         this.id = taskEntity.getId();
         this.name = taskEntity.getName();
-        this.DESCRIPTION = taskEntity.getDESCRIPTION();
+        this.description = taskEntity.getDescription();
         this.status = taskEntity.getStatus();
         this.priority = taskEntity.getPriority();
-        this.history_id = taskEntity.getHistory_id();
-        this.author_id = taskEntity.getAuthor_id();
+        this.historyId = taskEntity.getHistoryId();
+        this.authorId = taskEntity.getAuthorId();
     }
 
 }
