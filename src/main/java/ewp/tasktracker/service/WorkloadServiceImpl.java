@@ -23,7 +23,8 @@ public class WorkloadServiceImpl implements WorkloadService {
 
     @Override
     public WorkloadDto create(CreateWorkloadRq dto) {
-        return new WorkloadDto(workloadRepository.save(dto.toEntity()));
+        WorkloadEntity createdWorkloadDto = workloadRepository.save(dto.toEntity());
+        return new WorkloadDto(createdWorkloadDto);
     }
 
     @Override

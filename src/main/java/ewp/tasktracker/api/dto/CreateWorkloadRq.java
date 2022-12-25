@@ -26,7 +26,7 @@ public class CreateWorkloadRq {
     public WorkloadEntity toEntity() {
         return new WorkloadEntity(
                 this.name,
-                this.status.toString(),
+                this.status,
                 this.authorId,
                 LocalDateTime.now(),
                 LocalDateTime.now()
