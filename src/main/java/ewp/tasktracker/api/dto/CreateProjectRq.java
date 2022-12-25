@@ -5,30 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateProjectRq {
+    @NotBlank
     private String name;
-    protected String desc;
+    @NotBlank
+    private String description;
     private String status;
     private String authorId;
     private String workloadId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     public ProjectEntity toEntity() {
         return new ProjectEntity(
                 this.name,
-                this.desc,
+                this.description,
                 this.status,
                 this.authorId,
-                this.workloadId,
-                this.createdAt,
-                this.updatedAt
+                this.workloadId
         );
     }
 }

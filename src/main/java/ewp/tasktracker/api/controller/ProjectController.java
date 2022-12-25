@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class ProjectController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<ProjectDto> create(@RequestBody CreateProjectRq dto) {
+    public ResponseEntity<ProjectDto> create(@Validated @RequestBody CreateProjectRq dto) {
         ProjectDto projectDto = projectService.create(dto);
         return ResponseEntity.ok(projectDto);
     }

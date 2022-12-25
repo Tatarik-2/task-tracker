@@ -5,7 +5,6 @@ import ewp.tasktracker.api.dto.ProjectDto;
 import ewp.tasktracker.entity.ProjectEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.ProjectRepository;
-import liquibase.pro.packaged.P;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,14 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     public ProjectDto create(CreateProjectRq dto) {
-        return new ProjectDto(projectRepository.save(dto.toEntity()));
+        ProjectEntity entity = projectRepository.save(dto.toEntity());
+        return new ProjectDto(entity);
     }
 
     @Override
     public ProjectDto findById(String id) {
-        return new ProjectDto(projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project not found, id: " + id)));
+        ProjectEntity entity = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project not found, id: " + id));
+        return new ProjectDto(entity);
     }
 
     @Override
