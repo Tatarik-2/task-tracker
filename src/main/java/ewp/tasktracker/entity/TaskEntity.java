@@ -27,7 +27,4 @@ public class TaskEntity extends BaseEntity {
     private String assigneeId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public TaskEntity(String name, String description, ProgressStatus status, Priority priority, String historyId, String authorId, String assigneeId) {
-    }
 }

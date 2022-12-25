@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -40,8 +41,9 @@ public class CreateTaskRq {
                 this.priority,
                 this.historyId,
                 this.authorId,
-                this.assigneeId
+                this.assigneeId,
+                LocalDateTime.now(),
+                LocalDateTime.now()
         );
-
     }
 }
