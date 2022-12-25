@@ -6,10 +6,8 @@ import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +18,7 @@ public class CreateTaskRq {
     private String name;
     @NotNull
     @Size(min = 3, max = 256)
-    private String DESCRIPTION;
+    private String description;
     @NotNull
     private ProgressStatus status;
     private Priority priority;
@@ -37,7 +35,7 @@ public class CreateTaskRq {
     public TaskEntity toEntity() {
         return new TaskEntity(
                 this.name,
-                this.DESCRIPTION,
+                this.description,
                 this.status,
                 this.priority,
                 this.historyId,

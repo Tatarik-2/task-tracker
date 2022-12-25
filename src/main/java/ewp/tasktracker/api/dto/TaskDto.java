@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +14,6 @@ public class TaskDto {
     private String id;
     private String name;
     private String description;
-
     private ProgressStatus status;
     private Priority priority;
     private String historyId;
