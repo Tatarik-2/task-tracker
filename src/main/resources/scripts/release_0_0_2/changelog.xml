@@ -4,7 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="01_create_table_bugs.sql" relativeToChangelogFile="true"/>
     <include file="scripts/01_create_table_workloads.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_table_histories.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/01_create_table_bugs.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

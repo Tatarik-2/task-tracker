@@ -26,8 +26,9 @@ public class WorkloadServiceImpl implements WorkloadService {
 
     @Override
     public WorkloadDto findById(String id) {
-        return new WorkloadDto(workloadRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Workload not found, id: " + id)));
+        WorkloadEntity workloadEntity = workloadRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Workload not found, id: " + id));
+        return new WorkloadDto(workloadEntity);
     }
 
     @Override

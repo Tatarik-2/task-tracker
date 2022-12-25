@@ -3,7 +3,6 @@ package ewp.tasktracker.service;
 import ewp.tasktracker.api.dto.CreateWorkloadRq;
 import ewp.tasktracker.api.dto.UpdateWorkloadRq;
 import ewp.tasktracker.api.dto.WorkloadDto;
-import ewp.tasktracker.entity.WorkloadEntity;
 
 import java.util.List;
 
