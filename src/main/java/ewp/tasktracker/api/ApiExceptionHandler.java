@@ -36,16 +36,6 @@ public class ApiExceptionHandler {
                 HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, List<String>>> handleValidationException(MethodArgumentNotValidException exception) {
-        Map<String, List<String>> errors = new HashMap<>();
-        errors.put("errors",
-                exception.getBindingResult()
-                        .getFieldErrors().stream()
-                        .map(FieldError::getDefaultMessage).collect(Collectors.toList()));
-        return new ResponseEntity<>(errors, HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
     @ExceptionHandler
     public ResponseEntity<ErrorDto> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error(e.getMessage());
