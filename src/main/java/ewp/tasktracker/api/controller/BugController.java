@@ -2,6 +2,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.BugDto;
 import ewp.tasktracker.api.dto.CreateBugRq;
+import ewp.tasktracker.api.dto.UpdateBugRq;
 import ewp.tasktracker.service.BugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,6 +58,19 @@ public class BugController {
     public ResponseEntity<BugDto> create(@Valid @RequestBody CreateBugRq dto) {
         BugDto bugDto = bugService.create(dto);
         return ResponseEntity.ok(bugDto);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Обновить историю", response = BugDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<BugDto> updateHistory(@Validated @RequestBody UpdateBugRq dto) {
+        BugDto workloadDto = bugService.update(dto);
+        return ResponseEntity.ok(workloadDto);
     }
 }
 

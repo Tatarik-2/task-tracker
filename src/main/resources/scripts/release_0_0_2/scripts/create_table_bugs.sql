@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset zolotov-vu:create_table_releases rollbackSplitStatements:true
+--changeset zolotov-vu:create_table_bugs rollbackSplitStatements:true
 --comment: Создание таблицы багов
 CREATE TABLE BUGS
 (

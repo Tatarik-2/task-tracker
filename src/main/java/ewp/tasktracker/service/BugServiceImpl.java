@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.BugDto;
 import ewp.tasktracker.api.dto.CreateBugRq;
+import ewp.tasktracker.api.dto.UpdateBugRq;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
@@ -32,6 +33,15 @@ public class BugServiceImpl implements BugService {
     public List<BugDto> findAll() {
         return bugRepository.findAll().stream().
                 map(BugDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public BugDto update(UpdateBugRq dto) {
+        BugEntity bugEntity = bugRepository.findById(dto.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Bug not found, id: " + dto.getId()));
+        BugEntity bugEntityNew = dto.updateEntity(bugEntity, dto);
+        BugEntity resultEntity = bugRepository.save(bugEntityNew);
+        return new BugDto(resultEntity);
     }
 }
 
