@@ -1,7 +1,7 @@
-package ewp.tasktracker.service;
+package ewp.tasktracker.service.comment;
 
-import ewp.tasktracker.api.dto.CommentDto;
-import ewp.tasktracker.api.dto.CreateCommentRq;
+import ewp.tasktracker.api.dto.comment.CommentDto;
+import ewp.tasktracker.api.dto.comment.CreateCommentRq;
 
 import java.util.List;
 

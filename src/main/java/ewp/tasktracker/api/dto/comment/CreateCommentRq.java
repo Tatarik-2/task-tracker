@@ -1,4 +1,4 @@
-package ewp.tasktracker.api.dto;
+package ewp.tasktracker.api.dto.comment;
 
 import ewp.tasktracker.entity.CommentEntity;
 import lombok.AllArgsConstructor;
