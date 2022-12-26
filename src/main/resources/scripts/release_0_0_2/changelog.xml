@@ -9,5 +9,7 @@
     <include file="scripts/01_create_table_workloads.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table_histories.sql" relativeToChangelogFile="true"/>
     <include file="scripts/01_create_table_bugs.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_table_task.sql" relativeToChangelogFile="true"/>
+
 
 </databaseChangeLog>
