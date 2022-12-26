@@ -55,4 +55,8 @@ public class LabelController {
         return ResponseEntity.ok( labelService.save(dto));
     }
 
+    public ResponseEntity<LabelsDto> delete(@PathVariable String id){
+        return ResponseEntity.ok(labelService.delete(id));
+    }
+
 }

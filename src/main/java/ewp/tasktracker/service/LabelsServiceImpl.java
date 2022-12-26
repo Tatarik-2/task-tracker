@@ -2,7 +2,6 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateLabelRq;
 import ewp.tasktracker.api.dto.LabelsDto;
-import ewp.tasktracker.entity.LabelsEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.LabelsRepository;
 import lombok.AllArgsConstructor;
@@ -30,5 +29,12 @@ public class LabelsServiceImpl implements LabelsService {
     @Override
     public List<LabelsDto> findAll() {
         return labelsRepository.findAll().stream().map(LabelsDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public LabelsDto delete(String id) {
+        LabelsDto returnDto = new LabelsDto(labelsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + id)));
+        labelsRepository.deleteById(id);
+        return returnDto;
     }
 }
