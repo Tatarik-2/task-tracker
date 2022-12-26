@@ -1,7 +1,7 @@
-package ewp.tasktracker.service;
+package ewp.tasktracker.service.comment;
 
-import ewp.tasktracker.api.dto.CommentDto;
-import ewp.tasktracker.api.dto.CreateCommentRq;
+import ewp.tasktracker.api.dto.comment.CommentDto;
+import ewp.tasktracker.api.dto.comment.CreateCommentRq;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.CommentRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
+
     @Override
     public CommentDto save(CreateCommentRq dto) {
         return new CommentDto(commentRepository.save(dto.toEntity()));

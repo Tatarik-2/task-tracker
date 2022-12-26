@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeset burravlev:create_table_comments rollbackSplitStatements:true
---comment: Создание таблицы поставок
+--comment: Создание таблицы комментариев
 
 CREATE TABLE COMMENTS(
     ID VARCHAR(36) PRIMARY KEY,

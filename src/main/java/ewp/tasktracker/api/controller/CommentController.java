@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CommentDto;
-import ewp.tasktracker.api.dto.CreateCommentRq;
-import ewp.tasktracker.service.CommentService;
+import ewp.tasktracker.api.dto.comment.CommentDto;
+import ewp.tasktracker.api.dto.comment.CreateCommentRq;
+import ewp.tasktracker.service.comment.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -33,7 +33,7 @@ public class CommentController {
     }
 
     @PostMapping
-    @ApiOperation(value = "Схранить", response = CommentDto.class)
+    @ApiOperation(value = "Сохранить", response = CommentDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Успешное создание комментария"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),
