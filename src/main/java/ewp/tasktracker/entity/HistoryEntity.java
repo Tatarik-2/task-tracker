@@ -10,7 +10,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -40,10 +39,8 @@ public class HistoryEntity extends BaseEntity {
     private String sprintId;
     // в будущем вынести в BaseEntity
     @CreationTimestamp
-    @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     public HistoryEntity(String name, String description, ProgressStatus status, Priority priority,
