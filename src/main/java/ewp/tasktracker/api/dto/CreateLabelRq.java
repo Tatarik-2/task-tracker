@@ -17,11 +17,11 @@ public class CreateLabelRq {
     private String text;
     @NotEmpty
     @Size(max = 36)
-    private String author_id;
+    private String authorId;
 
     @NotEmpty
     @Size(max = 36)
-    private String task_id;
+    private String taskId;
 
     public LabelsEntity toEntity() {
         return new LabelsEntity();

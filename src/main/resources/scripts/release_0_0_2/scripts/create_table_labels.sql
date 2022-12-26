@@ -21,11 +21,11 @@ ON COLUMN LABELS.TEXT 'Текст метки';
 COMMENT
 ON COLUMN LABELS.TASK_ID IS 'Идентификатор задачи';
 COMMENT
-ON COLUMN WORKLOADS.AUTHOR_ID IS 'Идентификатор автора';
+ON COLUMN LABELS.AUTHOR_ID IS 'Идентификатор автора';
 COMMENT
-ON COLUMN WORKLOADS.CREATED_AT IS 'Дата создания записи';
+ON COLUMN LABELS.CREATED_AT IS 'Дата создания записи';
 COMMENT
-ON COLUMN WORKLOADS.UPDATED_AT IS 'Дата обновления записи';
+ON COLUMN LABELS.UPDATED_AT IS 'Дата обновления записи';
 
 
 -- rollback DROP TABLE LABELS;

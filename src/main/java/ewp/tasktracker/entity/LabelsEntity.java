@@ -8,20 +8,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
-
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "labels")
 public class LabelsEntity extends BaseEntity {
     private String text;
-    private String author_id;
-    private String task_id;
+    private String authorId;
+    private String taskId;
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     @UpdateTimestamp
-    private LocalDateTime updated_at;
-
-
+    private LocalDateTime updatedAt;
 }

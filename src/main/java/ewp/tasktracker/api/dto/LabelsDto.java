@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 public class LabelsDto {
     private String id;
     private String text;
-    private String author_id;
+    private String authorId;
 
-    private String task_id;
+    private String taskId;
 
     public LabelsDto(LabelsEntity labelsEntity) {
         this.id = labelsEntity.getId();
         this.text = labelsEntity.getText();
-        this.author_id = labelsEntity.getAuthor_id();
+        this.authorId = labelsEntity.getAuthorId();
     }
 }
