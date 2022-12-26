@@ -31,8 +31,9 @@ public class HistoryController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
 
-    public ResponseEntity<List<HistoryDto>> getAllHistories() {
-        return ResponseEntity.ok(historyService.findAllHistories());
+    public ResponseEntity<List<HistoryDto>> getAllHistories(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                            @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(historyService.findAllHistories(pageSize, pageNumber));
     }
 
     @GetMapping("/{id}")

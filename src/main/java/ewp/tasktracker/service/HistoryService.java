@@ -11,7 +11,7 @@ public interface HistoryService {
 
     HistoryDto findHistoryById(String id);
 
-    List<HistoryDto> findAllHistories();
+    List<HistoryDto> findAllHistories(Integer pageSize, Integer pageNumber);
 
     HistoryDto updateHistory(UpdateHistoryRq dto);
 
