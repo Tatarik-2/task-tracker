@@ -10,7 +10,7 @@
     <include file="scripts/01_create_table_bugs.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table_task.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table_labels.sql" relativeToChangelogFile="true"/>
-    <include file="01_create_table_bugs.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/10_create_table_epics.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_table_projects.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_table_epics.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

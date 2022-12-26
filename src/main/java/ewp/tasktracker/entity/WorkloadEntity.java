@@ -3,6 +3,7 @@ package ewp.tasktracker.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ewp.tasktracker.entity.common.BaseEntity;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;

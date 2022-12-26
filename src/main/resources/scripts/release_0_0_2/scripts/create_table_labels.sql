@@ -17,7 +17,7 @@ ON TABLE LABELS IS 'Метки задачи';
 COMMENT
 ON COLUMN LABELS.ID IS 'Идентификатор';
 COMMENT
-ON COLUMN LABELS.TEXT 'Текст метки';
+ON COLUMN LABELS.TEXT IS 'Текст метки';
 COMMENT
 ON COLUMN LABELS.TASK_ID IS 'Идентификатор задачи';
 COMMENT

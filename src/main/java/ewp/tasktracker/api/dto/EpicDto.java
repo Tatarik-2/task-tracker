@@ -2,7 +2,7 @@ package ewp.tasktracker.api.dto;
 
 import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.entity.common.Priority;
-import ewp.tasktracker.entity.common.Status;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ public class EpicDto {
     private String id;
     private String name;
     private String description;
-    private Status status;
+    private ProgressStatus status;
     private Priority priority;
     private String projectId;
     private String authorId;

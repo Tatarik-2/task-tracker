@@ -43,7 +43,8 @@ public class EpicController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<EpicDto> getEpicById(@PathVariable String id) {
-        return ResponseEntity.ok(epicService.findEpicById(id));
+        EpicDto epicDto = epicService.findEpicById(id);
+        return ResponseEntity.ok(epicDto);
     }
 
 
@@ -53,7 +54,7 @@ public class EpicController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<EpicDto> saveEpic(@Valid @RequestBody CreateEpicRq dto) {
+    public ResponseEntity<EpicDto> createEpic(@Valid @RequestBody CreateEpicRq dto) {
         return ResponseEntity.ok(epicService.saveEpic(dto));
     }
 }

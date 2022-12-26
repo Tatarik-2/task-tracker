@@ -11,7 +11,7 @@ CREATE TABLE epics
     priority VARCHAR(18) NOT NULL,
     project_id VARCHAR(36) NOT NULL,
     author_id VARCHAR(36) NOT NULL,
-    supersprint_id VARCHAR(36), --может быть null (судя по тз)
+    supersprint_id VARCHAR(36),
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL
 );
