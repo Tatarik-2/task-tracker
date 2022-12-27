@@ -1,34 +1,35 @@
 package ewp.tasktracker.service;
 
-import ewp.tasktracker.api.dto.CreateEpicRq;
-import ewp.tasktracker.api.dto.EpicDto;
+import ewp.tasktracker.api.dto.epic.CreateEpicRq;
+import ewp.tasktracker.api.dto.epic.EpicDto;
+import ewp.tasktracker.api.dto.epic.UpdateEpicRq;
 import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.EpicRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class EpicServiceImpl implements EpicService{
+public class EpicServiceImpl implements EpicService {
 
     private final EpicRepository epicRepository;
 
     @Override
     public EpicDto saveEpic(CreateEpicRq createEpicRq) {
-        return new EpicDto(epicRepository.save(createEpicRq.toEntity()));
+        EpicEntity epicEntity = epicRepository.save(createEpicRq.toEntity());
+        return new EpicDto(epicEntity);
     }
 
-//    Реализовать
-//    @Override
-//    public EpicEntity update(String id, EpicDto epicDto) {
-//        return null;
-//    }
+    @Override
+    public EpicDto updateEpic(UpdateEpicRq updateEpicRq) {
+        EpicEntity epicFromDb = epicRepository.findById(updateEpicRq.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Epic not found, id: " + updateEpicRq.getId()));
+        EpicEntity epicToUpdate = updateEpicRq.toEntity(epicFromDb, updateEpicRq);
+        EpicEntity updatedEpic = epicRepository.save(epicToUpdate);
+        return new EpicDto(updatedEpic);
+    }
+
 
 //    @Override
 //    public List<EpicDto> findAllEpics() {

@@ -1,17 +1,14 @@
 package ewp.tasktracker.service;
 
-import ewp.tasktracker.api.dto.CreateEpicRq;
-import ewp.tasktracker.api.dto.EpicDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
+import ewp.tasktracker.api.dto.epic.CreateEpicRq;
+import ewp.tasktracker.api.dto.epic.EpicDto;
+import ewp.tasktracker.api.dto.epic.UpdateEpicRq;
 
 public interface EpicService {
 
     EpicDto saveEpic(CreateEpicRq createEpicRq);
 
-//    EpicEntity update(String id, EpicDto epicDto);
+    EpicDto updateEpic(UpdateEpicRq updateEpicRq);
 
 //    List<EpicDto> findAllEpics();
 

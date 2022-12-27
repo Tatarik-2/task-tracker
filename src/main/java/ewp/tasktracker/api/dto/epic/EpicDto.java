@@ -1,4 +1,4 @@
-package ewp.tasktracker.api.dto;
+package ewp.tasktracker.api.dto.epic;
 
 import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.entity.common.Priority;

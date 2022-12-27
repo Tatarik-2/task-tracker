@@ -1,6 +1,6 @@
 package ewp.tasktracker.repository;
 
-import ewp.tasktracker.api.dto.EpicDto;
+
 import ewp.tasktracker.entity.EpicEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
