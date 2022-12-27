@@ -16,14 +16,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Valid
 public class CreateCommentRq {
-    @NotNull(message = "Текст комментаряи не может быть пустым")
-    @Size(min = 2, max = 128, message = "Длина комментария от 2 до 128 симовлов")
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 128)
     private String text;
-    @NotNull(message = "taskId не должен быть пустым")
-    @NotBlank(message = "")
+    @NotNull
+    @NotBlank
     private String taskId;
+
     public CommentEntity toEntity() {
-        return new CommentEntity(this.text, this.taskId, LocalDateTime.now(), LocalDateTime.now());
+        CommentEntity entity = new CommentEntity(this.text, this.taskId);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity.setUpdatedAd(LocalDateTime.now());
+        return entity;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ewp.tasktracker.entity;
+package ewp.tasktracker.entity.common;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
