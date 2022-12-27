@@ -10,6 +10,5 @@ public interface LabelsService {
 
     LabelsDto findById(String id);
     List<LabelsDto> findAll();
-
     LabelsDto delete(String id);
 }

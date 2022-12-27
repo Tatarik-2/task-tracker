@@ -19,5 +19,6 @@ public class LabelsDto {
         this.id = labelsEntity.getId();
         this.text = labelsEntity.getText();
         this.authorId = labelsEntity.getAuthorId();
+        this.taskId = labelsEntity.getTaskId();
     }
 }
