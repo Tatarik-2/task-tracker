@@ -68,7 +68,7 @@ public class BugController {
             @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<BugDto> updateHistory(@Validated @RequestBody UpdateBugRq dto) {
+    public ResponseEntity<BugDto> updateBug(@Validated @RequestBody UpdateBugRq dto) {
         BugDto bugDto = bugService.update(dto);
         return ResponseEntity.ok(bugDto);
     }
