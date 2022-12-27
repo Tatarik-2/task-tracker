@@ -3,10 +3,12 @@ package ewp.tasktracker.service.bug;
 import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.bug.CreateBugRq;
 import ewp.tasktracker.api.dto.bug.UpdateBugRq;
+import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class BugServiceImpl implements BugService {
     private final BugRepository bugRepository;
+    private final PageUtil pageUtil;
 
     @Override
     public BugDto create(CreateBugRq dto) {
@@ -30,8 +33,9 @@ public class BugServiceImpl implements BugService {
     }
 
     @Override
-    public List<BugDto> findAll() {
-        return bugRepository.findAll().stream().
+    public List<BugDto> findAll(Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        return bugRepository.findAll(PageRequest.of(pageNumber,pageSize)).stream().
                 map(BugDto::new).collect(Collectors.toList());
     }
 
