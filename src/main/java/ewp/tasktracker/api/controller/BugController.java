@@ -61,7 +61,7 @@ public class BugController {
     }
 
     @PutMapping
-    @ApiOperation(value = "Обновить историю", response = BugDto.class)
+    @ApiOperation(value = "Обновить баг", response = BugDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
@@ -69,8 +69,8 @@ public class BugController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<BugDto> updateHistory(@Validated @RequestBody UpdateBugRq dto) {
-        BugDto workloadDto = bugService.update(dto);
-        return ResponseEntity.ok(workloadDto);
+        BugDto bugDto = bugService.update(dto);
+        return ResponseEntity.ok(bugDto);
     }
 }
 
