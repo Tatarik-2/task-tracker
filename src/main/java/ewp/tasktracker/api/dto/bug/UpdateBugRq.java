@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateBugRq {
+    @NotNull
     private String id;
     @NotNull
     @Size(max = 128)
