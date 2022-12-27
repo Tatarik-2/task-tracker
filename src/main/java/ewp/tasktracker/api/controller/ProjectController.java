@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateProjectRq;
-import ewp.tasktracker.api.dto.ProjectDto;
-import ewp.tasktracker.service.ProjectService;
+import ewp.tasktracker.api.dto.project.CreateProjectRq;
+import ewp.tasktracker.api.dto.project.ProjectDto;
+import ewp.tasktracker.service.project.ProjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

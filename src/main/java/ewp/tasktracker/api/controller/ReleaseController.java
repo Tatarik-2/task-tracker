@@ -1,9 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateReleaseRq;
-import ewp.tasktracker.api.dto.ReleaseDto;
+import ewp.tasktracker.api.dto.release.CreateReleaseRq;
+import ewp.tasktracker.api.dto.release.ReleaseDto;
 import ewp.tasktracker.entity.ReleaseEntity;
-import ewp.tasktracker.service.ReleaseService;
+import ewp.tasktracker.service.release.ReleaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

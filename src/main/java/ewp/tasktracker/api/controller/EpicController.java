@@ -1,7 +1,8 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.*;
-import ewp.tasktracker.service.EpicService;
+import ewp.tasktracker.api.dto.epic.CreateEpicRq;
+import ewp.tasktracker.api.dto.epic.EpicDto;
+import ewp.tasktracker.service.epic.EpicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
