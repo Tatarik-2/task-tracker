@@ -1,5 +1,6 @@
 package ewp.tasktracker.entity;
 
+import ewp.tasktracker.entity.common.BaseEntity;
 import ewp.tasktracker.entity.common.Priority;
 import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
