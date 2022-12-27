@@ -24,7 +24,7 @@ public class WorkloadController {
 
     private final WorkloadService workloadService;
 
-    @GetMapping("")
+    @GetMapping
     @ApiOperation(value = "Получить список рабочих пространств", response = WorkloadDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
