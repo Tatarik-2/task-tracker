@@ -1,8 +1,8 @@
 package ewp.tasktracker.service;
 
-import ewp.tasktracker.api.dto.BugDto;
-import ewp.tasktracker.api.dto.CreateBugRq;
-import ewp.tasktracker.api.dto.UpdateBugRq;
+import ewp.tasktracker.api.dto.bug.BugDto;
+import ewp.tasktracker.api.dto.bug.CreateBugRq;
+import ewp.tasktracker.api.dto.bug.UpdateBugRq;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;

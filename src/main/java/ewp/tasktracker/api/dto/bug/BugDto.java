@@ -1,4 +1,4 @@
-package ewp.tasktracker.api.dto;
+package ewp.tasktracker.api.dto.bug;
 
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.entity.common.Priority;
