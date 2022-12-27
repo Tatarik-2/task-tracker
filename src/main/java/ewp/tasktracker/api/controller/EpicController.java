@@ -3,7 +3,7 @@ package ewp.tasktracker.api.controller;
 import ewp.tasktracker.api.dto.epic.CreateEpicRq;
 import ewp.tasktracker.api.dto.epic.EpicDto;
 import ewp.tasktracker.api.dto.epic.UpdateEpicRq;
-import ewp.tasktracker.service.EpicService;
+import ewp.tasktracker.service.epic.EpicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -62,7 +62,7 @@ public class EpicController {
     }
 
     @PutMapping
-    @ApiOperation(value = "Сохранить эпик", response = EpicDto.class)
+    @ApiOperation(value = "Обновить эпик", response = EpicDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),

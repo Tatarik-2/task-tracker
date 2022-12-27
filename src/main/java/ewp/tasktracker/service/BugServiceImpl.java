@@ -2,6 +2,7 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.BugDto;
 import ewp.tasktracker.api.dto.CreateBugRq;
+import ewp.tasktracker.config.TaskTrackerProperties;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class BugServiceImpl implements BugService {
     private final BugRepository bugRepository;
+    private final TaskTrackerProperties props;
 
     @Override
     public BugDto create(CreateBugRq dto) {
@@ -30,6 +32,8 @@ public class BugServiceImpl implements BugService {
 
     @Override
     public List<BugDto> findAll() {
+        System.out.println(props.getPageDefaultSize());
+
         return bugRepository.findAll().stream().
                 map(BugDto::new).collect(Collectors.toList());
     }

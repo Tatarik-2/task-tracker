@@ -18,9 +18,11 @@ public class UpdateEpicRq {
 
     @Size(max = 128)
     private String id;
+
     @NotEmpty
     @Size(max = 128)
     private String name;
+
     @NotEmpty
     @Size(max = 256)
     private String description;
@@ -28,12 +30,15 @@ public class UpdateEpicRq {
     private ProgressStatus status;
 
     private Priority priority;
+
     @NotEmpty
     @Size(max = 36)
     private String projectId;
+
     @NotEmpty
     @Size(max = 36)
     private String authorId;
+
     @NotEmpty
     @Size(max = 36)
     private String supersprintId;
