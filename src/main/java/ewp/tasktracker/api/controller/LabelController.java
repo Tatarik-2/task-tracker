@@ -55,6 +55,13 @@ public class LabelController {
         return ResponseEntity.ok( labelService.save(dto));
     }
 
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Удалить метку", response = LabelsDto.class)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
     public ResponseEntity<LabelsDto> delete(@PathVariable String id){
         return ResponseEntity.ok(labelService.delete(id));
     }
