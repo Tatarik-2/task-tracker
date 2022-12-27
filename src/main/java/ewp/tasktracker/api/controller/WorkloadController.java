@@ -1,8 +1,6 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateWorkloadRq;
-import ewp.tasktracker.api.dto.UpdateWorkloadRq;
-import ewp.tasktracker.api.dto.WorkloadDto;
+import ewp.tasktracker.api.dto.*;
 import ewp.tasktracker.service.WorkloadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +24,15 @@ public class WorkloadController {
 
     private final WorkloadService workloadService;
 
-    @GetMapping
+    @GetMapping("")
     @ApiOperation(value = "Получить список рабочих пространств", response = WorkloadDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<WorkloadDto>> getAll() {
-        List<WorkloadDto> workloads = workloadService.findAll();
+    public ResponseEntity<List<WorkloadDto>> getAll(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+                                                    @RequestParam("pageNumber") Integer pageNumber) {
+        List<WorkloadDto> workloads = workloadService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(workloads);
     }
 

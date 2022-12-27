@@ -3,12 +3,13 @@ package ewp.tasktracker.service;
 import ewp.tasktracker.api.dto.CreateWorkloadRq;
 import ewp.tasktracker.api.dto.UpdateWorkloadRq;
 import ewp.tasktracker.api.dto.WorkloadDto;
+import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.WorkloadEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.WorkloadRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +19,12 @@ import java.util.stream.Collectors;
 public class WorkloadServiceImpl implements WorkloadService {
 
     private final WorkloadRepository workloadRepository;
+    private final PageUtil pageUtil;
 
     @Override
     public WorkloadDto create(CreateWorkloadRq dto) {
-        return new WorkloadDto(workloadRepository.save(dto.toEntity()));
+        WorkloadEntity createdWorkloadDto = workloadRepository.save(dto.toEntity());
+        return new WorkloadDto(createdWorkloadDto);
     }
 
     @Override
@@ -32,8 +35,10 @@ public class WorkloadServiceImpl implements WorkloadService {
     }
 
     @Override
-    public List<WorkloadDto> findAll() {
-        return workloadRepository.findAll().stream().map(WorkloadDto::new).collect(Collectors.toList());
+    public List<WorkloadDto> findAll(Integer pageSize, Integer pageNumber) {
+        Integer size = pageUtil.pageSizeControl(pageSize);
+        return workloadRepository.findAll(PageRequest.of(pageNumber, size))
+                .stream().map(WorkloadDto::new).collect(Collectors.toList());
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface WorkloadService {
 
     WorkloadDto findById(String id);
 
-    List<WorkloadDto> findAll();
+    List<WorkloadDto> findAll(Integer pageSize, Integer pageNumber);
 
     WorkloadDto update(UpdateWorkloadRq dto);
 }
