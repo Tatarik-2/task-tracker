@@ -63,7 +63,8 @@ public class LabelController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<LabelsDto> delete(@PathVariable String id){
-        return ResponseEntity.ok(labelService.delete(id));
+        LabelsDto dto = labelService.delete(id);
+        return ResponseEntity.ok(dto);
     }
 
 }
