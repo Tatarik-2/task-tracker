@@ -1,11 +1,12 @@
 package ewp.tasktracker.entity;
 
+import ewp.tasktracker.entity.common.BaseEntity;
 import ewp.tasktracker.entity.common.Priority;
 import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ewp.tasktracker.entity.common.BaseEntity;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,7 @@ import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "tasks")

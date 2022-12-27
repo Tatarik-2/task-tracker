@@ -1,5 +1,6 @@
 package ewp.tasktracker.api.dto;
 
+import ewp.tasktracker.entity.common.Status;
 import ewp.tasktracker.entity.WorkloadEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WorkloadDto {
     private String name;
-    private String status;
+    private Status status;
     private String authorId;
 
     public WorkloadDto(WorkloadEntity workloadEntity) {

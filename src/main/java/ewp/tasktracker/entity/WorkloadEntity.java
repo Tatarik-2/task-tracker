@@ -1,11 +1,14 @@
 package ewp.tasktracker.entity;
 
+import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ewp.tasktracker.entity.common.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,7 +18,8 @@ import java.time.LocalDateTime;
 public class WorkloadEntity extends BaseEntity{
 
     private String name;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     private String authorId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
