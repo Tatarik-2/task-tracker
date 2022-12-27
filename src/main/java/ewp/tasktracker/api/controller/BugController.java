@@ -3,7 +3,7 @@ package ewp.tasktracker.api.controller;
 import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.bug.CreateBugRq;
 import ewp.tasktracker.api.dto.bug.UpdateBugRq;
-import ewp.tasktracker.service.BugService;
+import ewp.tasktracker.service.bug.BugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

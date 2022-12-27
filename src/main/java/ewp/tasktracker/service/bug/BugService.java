@@ -1,4 +1,4 @@
-package ewp.tasktracker.service;
+package ewp.tasktracker.service.bug;
 
 import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.bug.CreateBugRq;
