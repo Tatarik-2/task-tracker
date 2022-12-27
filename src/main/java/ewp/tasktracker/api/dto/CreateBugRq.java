@@ -3,6 +3,7 @@ package ewp.tasktracker.api.dto;
 import com.sun.istack.NotNull;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.entity.common.Priority;
+import ewp.tasktracker.entity.common.ProgressStatus;
 import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class CreateBugRq {
     @NotNull
     @Size(max = 256)
     private String description;
-    private Status status;
+    private ProgressStatus status;
     private Priority priority;
     @NotNull
     @Size(max = 36)
