@@ -2,7 +2,8 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.epic.CreateEpicRq;
 import ewp.tasktracker.api.dto.epic.EpicDto;
-import ewp.tasktracker.service.epic.EpicService;
+import ewp.tasktracker.api.dto.epic.UpdateEpicRq;
+import ewp.tasktracker.service.EpicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -53,9 +54,23 @@ public class EpicController {
     @ApiOperation(value = "Сохранить эпик", response = EpicDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
-            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity")
     })
     public ResponseEntity<EpicDto> createEpic(@Valid @RequestBody CreateEpicRq dto) {
         return ResponseEntity.ok(epicService.saveEpic(dto));
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Сохранить эпик", response = EpicDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
+            @ApiResponse(code = 422, message = "Ошибка валидации"),
+            @ApiResponse(code = 404, message = "Сущность для обновления не найдена")
+    })
+    public ResponseEntity<EpicDto> updateEpic(@Valid @RequestBody UpdateEpicRq dto) {
+        EpicDto epicDto = epicService.updateEpic(dto);
+        return ResponseEntity.ok(epicDto);
     }
 }
