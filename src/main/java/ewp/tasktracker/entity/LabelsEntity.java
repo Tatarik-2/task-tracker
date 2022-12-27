@@ -1,27 +1,24 @@
 package ewp.tasktracker.entity;
+import ewp.tasktracker.entity.common.BaseEntity;
 
-import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ewp.tasktracker.entity.common.BaseEntity;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "workloads")
-public class WorkloadEntity extends BaseEntity{
-
-    private String name;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+@Entity(name = "labels")
+public class LabelsEntity extends BaseEntity {
+    private String text;
     private String authorId;
+    private String taskId;
+    @CreationTimestamp
     private LocalDateTime createdAt;
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 }

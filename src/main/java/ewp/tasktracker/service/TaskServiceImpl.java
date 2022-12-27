@@ -2,10 +2,10 @@ package ewp.tasktracker.service;
 
 import ewp.tasktracker.api.dto.CreateTaskRq;
 import ewp.tasktracker.api.dto.TaskDto;
+import ewp.tasktracker.api.dto.UpdateTaskRq;
 import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +35,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDto> findAll() {
         return taskRepository.findAll().stream().map(TaskDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public TaskDto updateTask(UpdateTaskRq dto) {
+        TaskEntity taskEntityOne = taskRepository.findById(dto.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Task not found, id: " + dto.getId()));
+        TaskEntity taskEntityNew = dto.updateEntity(taskEntityOne, dto);
+        TaskEntity resultEntity = taskRepository.save(taskEntityNew);
+        return new TaskDto(resultEntity);
     }
 }
