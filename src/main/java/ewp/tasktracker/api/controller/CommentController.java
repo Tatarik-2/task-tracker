@@ -2,6 +2,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.comment.CommentDto;
 import ewp.tasktracker.api.dto.comment.CreateCommentRq;
+import ewp.tasktracker.api.dto.comment.UpdateCommentRq;
 import ewp.tasktracker.service.comment.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +41,20 @@ public class CommentController {
             @ApiResponse(code = 422, message = "Неподдерживаемый формат")
     })
     public ResponseEntity<CommentDto> createComment(@Valid @RequestBody CreateCommentRq request) {
-        return new ResponseEntity<>(commentService.save(request), HttpStatus.CREATED);
+        CommentDto response = commentService.save(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PatchMapping
+    @ApiOperation(value = "Сохранить", response = CommentDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Успешное обновление комментария"),
+            @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),
+            @ApiResponse(code = 422, message = "Неподдерживаемый формат"),
+            @ApiResponse(code = 404, message = "Комментарий не найден")
+    })
+    public ResponseEntity<CommentDto> updateComment(@Valid @RequestBody UpdateCommentRq request) {
+        CommentDto response = commentService.update(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
