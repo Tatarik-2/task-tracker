@@ -11,4 +11,5 @@ public interface CommentService {
     CommentDto findById(String id);
     List<CommentDto> findAll();
     CommentDto update(UpdateCommentRq request);
+    CommentDto deleteById(String id);
 }
