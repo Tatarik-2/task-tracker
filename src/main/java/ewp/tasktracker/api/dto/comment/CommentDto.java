@@ -21,8 +21,6 @@ public class CommentDto {
     @NotNull
     @NotBlank
     private String text;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     @NotNull
     @NotBlank
     private String taskId;
@@ -30,8 +28,6 @@ public class CommentDto {
     public CommentDto(CommentEntity entity) {
         this.id = entity.getId();
         this.text = entity.getText();
-        this.createdAt = entity.getCreatedAt();
-        this.updatedAt = entity.getUpdatedAd();
         this.taskId = entity.getTaskId();
     }
 }
