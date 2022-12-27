@@ -5,6 +5,7 @@ import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ewp.tasktracker.entity.common.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

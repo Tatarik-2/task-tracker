@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ewp.tasktracker.entity.common.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
