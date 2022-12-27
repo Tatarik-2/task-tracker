@@ -1,4 +1,5 @@
 package ewp.tasktracker.entity;
+
 import ewp.tasktracker.entity.common.Priority;
 import ewp.tasktracker.entity.common.ProgressStatus;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,6 @@ import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "tasks")
