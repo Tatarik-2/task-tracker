@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -31,9 +30,7 @@ public class UpdateLabelRq {
         return new LabelsEntity(
                 this.text,
                 this.taskId,
-                this.authorId,
-                labelsEntityFromDB.getCreatedAt(),
-                LocalDateTime.now()
+                this.authorId
         );
     }
 }
