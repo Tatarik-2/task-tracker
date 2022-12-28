@@ -78,7 +78,7 @@ public class HistoryController {
             @ApiResponse(code = 404, message = "Сущность не найдена"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<PageDto<HistoryDto>> getHistoryById(@RequestParam(value = "filter") String filter,
+    public ResponseEntity<PageDto<HistoryDto>> getHistoryByName(@RequestParam(value = "filter") String filter,
                                                               @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                               @RequestParam(value = "pageNumber") Integer pageNumber) {
         return ResponseEntity.ok(historyService.findHistoryByName(filter, pageSize, pageNumber));
