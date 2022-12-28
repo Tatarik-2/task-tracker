@@ -1,6 +1,7 @@
 package ewp.tasktracker.api;
 
 import ewp.tasktracker.api.dto.error.ErrorDto;
+import ewp.tasktracker.exception.LocalDateTimeIncorrectException;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,4 +42,12 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorDto> handleLocalDateTimeIncorrectException(LocalDateTimeIncorrectException e) {
+        log.error(e.getMessage());
+        return new ResponseEntity<>(new ErrorDto(HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase()), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
 }
