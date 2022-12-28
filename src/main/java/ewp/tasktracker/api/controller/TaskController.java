@@ -1,6 +1,5 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.history.HistoryDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
@@ -77,7 +76,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Удалить комментарий", response = TaskDto.class)
+    @ApiOperation(value = "Удалить задачу", response = TaskDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешное удаление задачи"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),
