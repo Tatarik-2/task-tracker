@@ -9,9 +9,8 @@ import java.util.List;
 public interface TaskService {
 
     TaskDto create(CreateTaskRq dto);
-
     TaskDto findById(String id);
-
+    TaskDto deleteById(String id);
     TaskDto updateTask(UpdateTaskRq dto);
     List<TaskDto> findAllTask(Integer pageSize, Integer pageNumber);
 }
