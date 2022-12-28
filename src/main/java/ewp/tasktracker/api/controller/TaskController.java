@@ -2,6 +2,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.CreateTaskRq;
 import ewp.tasktracker.api.dto.TaskDto;
+import ewp.tasktracker.api.dto.UpdateTaskRq;
 import ewp.tasktracker.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -61,4 +63,15 @@ public class TaskController {
         return ResponseEntity.ok(taskDto);
     }
 
+    @PutMapping
+    @ApiOperation(value = "Обновление задач", response = TaskDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка валидации"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<TaskDto> updateTask(@Validated @RequestBody UpdateTaskRq dto) {
+        return ResponseEntity.ok(tasksService.updateTask(dto));
+    }
 }
