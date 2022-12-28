@@ -66,11 +66,23 @@ public class BugController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
-            @ApiResponse(code = 422, message = "ошибка в валидации"),
+            @ApiResponse(code = 422, message = "Ошибка в валидации"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<BugDto> update(@Validated @RequestBody UpdateBugRq dto) {
         BugDto bugDto = bugService.update(dto);
+        return ResponseEntity.ok(bugDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Удалить баг", response = BugDto.class)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<BugDto> delete(@PathVariable String id){
+        BugDto bugDto = bugService.delete(id);
         return ResponseEntity.ok(bugDto);
     }
 }
