@@ -1,7 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.*;
-import ewp.tasktracker.service.WorkloadService;
+import ewp.tasktracker.api.dto.workload.CreateWorkloadRq;
+import ewp.tasktracker.api.dto.workload.UpdateWorkloadRq;
+import ewp.tasktracker.api.dto.workload.WorkloadDto;
+import ewp.tasktracker.service.workload.WorkloadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

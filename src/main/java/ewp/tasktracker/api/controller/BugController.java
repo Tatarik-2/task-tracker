@@ -31,8 +31,9 @@ public class BugController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<BugDto>> getAll() {
-        List<BugDto> bugs = bugService.findAll();
+    public ResponseEntity<List<BugDto>> getAll(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                               @RequestParam(value = "pageNumber") Integer pageNumber) {
+        List<BugDto> bugs = bugService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(bugs);
     }
 
@@ -65,7 +66,7 @@ public class BugController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
-            @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
+            @ApiResponse(code = 422, message = "ошибка в валидации"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<BugDto> update(@Validated @RequestBody UpdateBugRq dto) {
