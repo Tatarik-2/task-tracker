@@ -6,6 +6,7 @@ import ewp.tasktracker.api.dto.bug.UpdateBugRq;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
+import ewp.tasktracker.service.bug.BugService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateDeliveryRq;
-import ewp.tasktracker.api.dto.DeliveryDto;
+import ewp.tasktracker.api.dto.delivery.CreateDeliveryRq;
+import ewp.tasktracker.api.dto.delivery.DeliveryDto;
 import ewp.tasktracker.entity.DeliveryEntity;
-import ewp.tasktracker.service.DeliveryService;
+import ewp.tasktracker.service.delivery.DeliveryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

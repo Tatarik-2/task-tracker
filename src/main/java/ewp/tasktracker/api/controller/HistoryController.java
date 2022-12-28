@@ -1,9 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateHistoryRq;
-import ewp.tasktracker.api.dto.HistoryDto;
-import ewp.tasktracker.api.dto.UpdateHistoryRq;
-import ewp.tasktracker.service.HistoryService;
+import ewp.tasktracker.api.dto.history.CreateHistoryRq;
+import ewp.tasktracker.api.dto.history.HistoryDto;
+import ewp.tasktracker.api.dto.history.UpdateHistoryRq;
+import ewp.tasktracker.service.history.HistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -31,8 +31,9 @@ public class HistoryController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
 
-    public ResponseEntity<List<HistoryDto>> getAllHistories() {
-        return ResponseEntity.ok(historyService.findAllHistories());
+    public ResponseEntity<List<HistoryDto>> getAllHistories(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                            @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(historyService.findAllHistories(pageSize, pageNumber));
     }
 
     @GetMapping("/{id}")
