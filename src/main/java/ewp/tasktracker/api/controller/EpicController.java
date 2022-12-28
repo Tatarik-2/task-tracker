@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/epic",
@@ -26,16 +27,17 @@ import javax.validation.Valid;
 public class EpicController {
     private final EpicService epicService;
 
-//    Пагинация
-//    @GetMapping
-//    @ApiOperation(value = "Получить список эпиков", response = EpicDto.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Успешный ответ"),
-//            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
-//    })
-//    public ResponseEntity<List<EpicDto>> getAll() {
-//        return ResponseEntity.ok(epicService.findAll());
-//    }
+    @GetMapping
+    @ApiOperation(value = "Получить список эпиков", response = EpicDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<List<EpicDto>> getListOfEpics(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+                                                @RequestParam("pageNumber") Integer pageNumber) {
+        List<EpicDto> listOfEpics = epicService.getListOfEpics(pageSize, pageNumber);
+        return ResponseEntity.ok(listOfEpics);
+    }
 
 
     @GetMapping("/{id}")
