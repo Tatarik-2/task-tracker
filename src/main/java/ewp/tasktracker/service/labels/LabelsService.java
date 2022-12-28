@@ -1,7 +1,8 @@
-package ewp.tasktracker.service;
+package ewp.tasktracker.service.labels;
 
-import ewp.tasktracker.api.dto.CreateLabelRq;
-import ewp.tasktracker.api.dto.LabelsDto;
+import ewp.tasktracker.api.dto.label.CreateLabelRq;
+import ewp.tasktracker.api.dto.label.LabelsDto;
+import ewp.tasktracker.api.dto.label.UpdateLabelRq;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface LabelsService {
 
     LabelsDto findById(String id);
     List<LabelsDto> findAll();
-
     LabelsDto delete(String id);
+
+    LabelsDto update(UpdateLabelRq dto);
 }

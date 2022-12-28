@@ -2,6 +2,8 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.label.CreateLabelRq;
 import ewp.tasktracker.api.dto.label.LabelsDto;
+import ewp.tasktracker.api.dto.label.UpdateLabelRq;
+import ewp.tasktracker.api.dto.workload.WorkloadDto;
 import ewp.tasktracker.service.labels.LabelsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -65,6 +67,19 @@ public class LabelController {
     public ResponseEntity<LabelsDto> delete(@PathVariable String id){
         LabelsDto dto = labelService.delete(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Редактировать метку", response = LabelsDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
+            @ApiResponse(code = 422, message = "Ошибка валидации"),
+            @ApiResponse(code = 404, message = "Сущность для обновления не найдена")
+    })
+    public ResponseEntity<LabelsDto> update(@Valid @RequestBody UpdateLabelRq dto) {
+        LabelsDto labelsDto = labelService.update(dto);
+        return ResponseEntity.ok(labelsDto);
     }
 
 }
