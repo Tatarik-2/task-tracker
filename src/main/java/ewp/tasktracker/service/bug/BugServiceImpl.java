@@ -7,7 +7,6 @@ import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
-import ewp.tasktracker.service.bug.BugService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class BugServiceImpl implements BugService {
     @Override
     public List<BugDto> findAll(Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
-        return bugRepository.findAll(PageRequest.of(pageNumber,pageSize)).stream().
+        return bugRepository.findAll(PageRequest.of(pageNumber, pageSize)).stream().
                 map(BugDto::new).collect(Collectors.toList());
     }
 
@@ -47,6 +46,14 @@ public class BugServiceImpl implements BugService {
         BugEntity bugEntityNew = dto.updateEntity(bugEntity, dto);
         BugEntity resultEntity = bugRepository.save(bugEntityNew);
         return new BugDto(resultEntity);
+    }
+
+    @Override
+    public BugDto delete(String id) {
+        BugDto bugDto = new BugDto(bugRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Bug not found, id: " + id)));
+        bugRepository.deleteById(id);
+        return bugDto;
     }
 }
 
