@@ -12,9 +12,7 @@ public interface TaskService {
 
     TaskDto findById(String id);
 
-    List<TaskDto> findAll();
-
     TaskDto updateTask(UpdateTaskRq dto);
-
+    List<TaskDto> findAllTask(Integer pageSize, Integer pageNumber);
 }
 
