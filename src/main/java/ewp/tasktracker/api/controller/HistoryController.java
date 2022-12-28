@@ -71,15 +71,16 @@ public class HistoryController {
         return ResponseEntity.ok(historyService.updateHistory(dto));
     }
 
-    @GetMapping("search/{filter}")
+    @GetMapping("search")
     @ApiOperation(value = "Поиск истории по названию", response = PageDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<PageDto<HistoryDto>> getHistoryById(@PathVariable String filter, @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                                  @RequestParam(value = "pageNumber") Integer pageNumber) {
+    public ResponseEntity<PageDto<HistoryDto>> getHistoryById(@RequestParam(value = "filter") String filter,
+                                                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                              @RequestParam(value = "pageNumber") Integer pageNumber) {
         return ResponseEntity.ok(historyService.findHistoryByName(filter, pageSize, pageNumber));
     }
 }
