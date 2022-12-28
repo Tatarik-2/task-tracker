@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +24,6 @@ public class CreateLabelRq {
     private String taskId;
 
     public LabelsEntity toEntity() {
-        return new LabelsEntity(this.text = text, this.authorId = authorId, this.taskId = taskId, LocalDateTime.now(), LocalDateTime.now());
+        return new LabelsEntity(this.text = text, this.authorId = authorId, this.taskId = taskId);
     }
 }
