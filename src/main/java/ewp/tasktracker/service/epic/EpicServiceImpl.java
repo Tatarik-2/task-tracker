@@ -6,14 +6,8 @@ import ewp.tasktracker.api.dto.epic.UpdateEpicRq;
 import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.EpicRepository;
-import ewp.tasktracker.service.epic.EpicService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @AllArgsConstructor
 @Service
