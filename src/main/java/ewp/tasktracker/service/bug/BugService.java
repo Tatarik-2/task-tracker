@@ -11,7 +11,7 @@ public interface BugService {
 
     BugDto findById(String id);
 
-    List<BugDto> findAll();
+    List<BugDto> findAll(Integer pageSize, Integer pageNumber);
 
     BugDto update(UpdateBugRq dto);
 }
