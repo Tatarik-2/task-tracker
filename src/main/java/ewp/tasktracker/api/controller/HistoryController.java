@@ -1,8 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateHistoryRq;
-import ewp.tasktracker.api.dto.HistoryDto;
-import ewp.tasktracker.service.HistoryService;
+import ewp.tasktracker.api.dto.history.CreateHistoryRq;
+import ewp.tasktracker.api.dto.history.HistoryDto;
+import ewp.tasktracker.api.dto.history.UpdateHistoryRq;
+import ewp.tasktracker.service.history.HistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,8 +31,9 @@ public class HistoryController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
 
-    public ResponseEntity<List<HistoryDto>> getAllHistories() {
-        return ResponseEntity.ok(historyService.findAllHistories());
+    public ResponseEntity<List<HistoryDto>> getAllHistories(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                            @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(historyService.findAllHistories(pageSize, pageNumber));
     }
 
     @GetMapping("/{id}")
@@ -54,5 +56,17 @@ public class HistoryController {
     })
     public ResponseEntity<HistoryDto> createHistory(@Validated @RequestBody CreateHistoryRq dto) {
         return ResponseEntity.ok(historyService.saveHistory(dto));
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Обновить историю", response = HistoryDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<HistoryDto> updateHistory(@Validated @RequestBody UpdateHistoryRq dto) {
+        return ResponseEntity.ok(historyService.updateHistory(dto));
     }
 }

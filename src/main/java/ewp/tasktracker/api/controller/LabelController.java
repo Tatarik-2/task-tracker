@@ -1,8 +1,8 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.CreateLabelRq;
-import ewp.tasktracker.api.dto.LabelsDto;
-import ewp.tasktracker.service.LabelsService;
+import ewp.tasktracker.api.dto.label.CreateLabelRq;
+import ewp.tasktracker.api.dto.label.LabelsDto;
+import ewp.tasktracker.service.labels.LabelsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

@@ -1,8 +1,9 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.BugDto;
-import ewp.tasktracker.api.dto.CreateBugRq;
-import ewp.tasktracker.service.BugService;
+import ewp.tasktracker.api.dto.bug.BugDto;
+import ewp.tasktracker.api.dto.bug.CreateBugRq;
+import ewp.tasktracker.api.dto.bug.UpdateBugRq;
+import ewp.tasktracker.service.bug.BugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,8 +31,9 @@ public class BugController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<BugDto>> getAll() {
-        List<BugDto> bugs = bugService.findAll();
+    public ResponseEntity<List<BugDto>> getAll(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                               @RequestParam(value = "pageNumber") Integer pageNumber) {
+        List<BugDto> bugs = bugService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(bugs);
     }
 
@@ -55,6 +58,19 @@ public class BugController {
     })
     public ResponseEntity<BugDto> create(@Valid @RequestBody CreateBugRq dto) {
         BugDto bugDto = bugService.create(dto);
+        return ResponseEntity.ok(bugDto);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Обновить баг", response = BugDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 422, message = "ошибка в валидации"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<BugDto> update(@Validated @RequestBody UpdateBugRq dto) {
+        BugDto bugDto = bugService.update(dto);
         return ResponseEntity.ok(bugDto);
     }
 }
