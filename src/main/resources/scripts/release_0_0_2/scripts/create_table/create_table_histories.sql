@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset kichenko-av:create_table_deliveries rollbackSplitStatements:true
+--changeset kichenko-av:create_table_histories rollbackSplitStatements:true
 --comment: Создание таблицы историй
 CREATE TABLE HISTORIES
 (
