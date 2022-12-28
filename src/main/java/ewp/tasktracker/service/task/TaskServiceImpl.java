@@ -7,6 +7,7 @@ import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,10 @@ import java.util.stream.Collectors;
 
 
 @Service
+@AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final PageUtil pageUtil;
-
-    public TaskServiceImpl(TaskRepository taskRepository, PageUtil pageUtil) {
-        this.taskRepository = taskRepository;
-        this.pageUtil = pageUtil;
-    }
 
     @Override
     public TaskDto create(CreateTaskRq dto) {
