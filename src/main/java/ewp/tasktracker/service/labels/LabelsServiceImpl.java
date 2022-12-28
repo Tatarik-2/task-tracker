@@ -1,7 +1,10 @@
-package ewp.tasktracker.service;
+package ewp.tasktracker.service.labels;
 
-import ewp.tasktracker.api.dto.CreateLabelRq;
-import ewp.tasktracker.api.dto.LabelsDto;
+
+import ewp.tasktracker.api.dto.label.CreateLabelRq;
+import ewp.tasktracker.api.dto.label.LabelsDto;
+import ewp.tasktracker.api.dto.label.UpdateLabelRq;
+import ewp.tasktracker.entity.LabelsEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.LabelsRepository;
 import lombok.AllArgsConstructor;
@@ -23,7 +26,8 @@ public class LabelsServiceImpl implements LabelsService {
 
     @Override
     public LabelsDto findById(String id) {
-        return new LabelsDto(labelsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + id)));
+        return new LabelsDto(labelsRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("Label not found, id: " + id)));
     }
 
     @Override
@@ -33,8 +37,18 @@ public class LabelsServiceImpl implements LabelsService {
 
     @Override
     public LabelsDto delete(String id) {
-        LabelsDto returnDto = new LabelsDto(labelsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + id)));
+        LabelsDto returnDto = new LabelsDto(labelsRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("Label not found, id: " + id)));
         labelsRepository.deleteById(id);
         return returnDto;
+    }
+
+    @Override
+    public LabelsDto update(UpdateLabelRq dto) {
+        LabelsEntity labelsEntityFromDB = labelsRepository.findById(dto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Label not found, id: " + dto.getId()));
+        LabelsEntity labelsEntityForUpdate = dto.toEntity(labelsEntityFromDB);
+        labelsEntityForUpdate.setId(dto.getId());
+        return new LabelsDto(labelsRepository.save(labelsEntityForUpdate));
     }
 }
