@@ -37,6 +37,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public TaskDto deleteById(String id) {
+        TaskDto task = findById(id);
+        taskRepository.deleteById(id);
+        return task;
+    }
+
+    @Override
     public TaskDto updateTask(UpdateTaskRq dto) {
         TaskEntity taskEntityOne = taskRepository.findById(dto.getId()).orElseThrow(() ->
                 new ResourceNotFoundException("Task not found, id: " + dto.getId()));
