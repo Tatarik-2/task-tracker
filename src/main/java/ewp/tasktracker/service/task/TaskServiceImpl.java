@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
+
     private final TaskRepository taskRepository;
     private final PageUtil pageUtil;
 
