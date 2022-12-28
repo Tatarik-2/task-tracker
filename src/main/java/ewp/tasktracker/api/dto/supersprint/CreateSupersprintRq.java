@@ -28,9 +28,7 @@ public class CreateSupersprintRq {
                 this.name,
                 this.startAt,
                 this.endAt,
-                this.authorId,
-                LocalDateTime.now(),
-                LocalDateTime.now()
+                this.authorId
         );
     }
 }

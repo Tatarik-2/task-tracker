@@ -35,8 +35,7 @@ public class UpdateSupersprintRq {
                 this.startAt,
                 this.endAt,
                 this.authorId,
-                supersprintEntityFromDB.getCreatedAt(),
-                LocalDateTime.now()
+                supersprintEntityFromDB.getCreatedAt()
         );
     }
 }
