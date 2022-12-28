@@ -27,18 +27,6 @@ public class TaskController {
 
     private final TaskService tasksService;
 
-
-    @GetMapping
-    @ApiOperation(value = "Получить список задач", response = TaskDto.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Успешный ответ"),
-            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
-    })
-    public ResponseEntity<List<TaskDto>> getAll() {
-        List<TaskDto> tasks = tasksService.findAll();
-        return ResponseEntity.ok(tasks);
-    }
-
     @GetMapping("/{id}")
     @ApiOperation(value = "Получить задачу по id", response = TaskDto.class)
     @ApiResponses(value = {
@@ -73,5 +61,11 @@ public class TaskController {
     })
     public ResponseEntity<TaskDto> updateTask(@Validated @RequestBody UpdateTaskRq dto) {
         return ResponseEntity.ok(tasksService.updateTask(dto));
+    }
+
+
+    public ResponseEntity<List<TaskDto>> getAllTask(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                         @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(tasksService.findAllTask(pageSize, pageNumber));
     }
 }
