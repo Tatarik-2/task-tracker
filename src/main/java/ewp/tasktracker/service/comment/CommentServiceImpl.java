@@ -2,6 +2,7 @@ package ewp.tasktracker.service.comment;
 
 import ewp.tasktracker.api.dto.comment.CommentDto;
 import ewp.tasktracker.api.dto.comment.CreateCommentRq;
+import ewp.tasktracker.api.dto.comment.UpdateCommentRq;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.CommentRepository;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,13 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository
                 .findAll().stream().map(CommentDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CommentDto update(UpdateCommentRq request) {
+        CommentDto comment = findById(request.getId());
+        comment.setText(request.getText());
+        comment.setTaskId(request.getTaskId());
+        return comment;
     }
 }
