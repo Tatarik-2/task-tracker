@@ -39,14 +39,14 @@ public class UpdateBugRq {
     public BugEntity updateEntity(BugEntity entityFromDB, UpdateBugRq updateBugRq) {
         BugEntity bugEntity = new BugEntity();
         bugEntity.setId(entityFromDB.getId());
-        bugEntity.setName(entityFromDB.getName());
-        bugEntity.setDescription(entityFromDB.getDescription());
-        bugEntity.setStatus(entityFromDB.getStatus());
-        bugEntity.setPriority(entityFromDB.getPriority());
-        bugEntity.setHistoryId(entityFromDB.getHistoryId());
-        bugEntity.setAuthorId(entityFromDB.getAuthorId());
-        bugEntity.setAssigneeId(entityFromDB.getAssigneeId());
-        bugEntity.setSprintId(entityFromDB.getSprintId());
+        bugEntity.setName(updateBugRq.getName());
+        bugEntity.setDescription(updateBugRq.getDescription());
+        bugEntity.setStatus(updateBugRq.getStatus());
+        bugEntity.setPriority(updateBugRq.getPriority());
+        bugEntity.setHistoryId(updateBugRq.getHistoryId());
+        bugEntity.setAuthorId(updateBugRq.getAuthorId());
+        bugEntity.setAssigneeId(updateBugRq.getAssigneeId());
+        bugEntity.setSprintId(updateBugRq.getSprintId());
         bugEntity.setCreatedAt(entityFromDB.getCreatedAt());
         return bugEntity;
     }
