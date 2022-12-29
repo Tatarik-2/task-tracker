@@ -50,7 +50,6 @@ public class TaskServiceImpl implements TaskService {
         return new TaskDto(resultEntity);
     }
 
-
     public List<TaskDto> findAllTask(Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
         return taskRepository.findAll(PageRequest.of(pageNumber, pageSize))
