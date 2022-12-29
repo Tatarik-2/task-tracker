@@ -43,4 +43,11 @@ public class CommentServiceImpl implements CommentService {
         comment.setTaskId(request.getTaskId());
         return comment;
     }
+
+    @Override
+    public CommentDto deleteById(String id) {
+        CommentDto comment = findById(id);
+        commentRepository.deleteById(id);
+        return comment;
+    }
 }
