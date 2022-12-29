@@ -30,7 +30,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    @ApiOperation(value = "Сохранить комментарий", response = CommentDto.class)
+    @ApiOperation(value = "Сохранить", response = CommentDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Успешное создание комментария"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),
@@ -42,7 +42,7 @@ public class CommentController {
     }
 
     @PatchMapping
-    @ApiOperation(value = "Обновить комментарий", response = CommentDto.class)
+    @ApiOperation(value = "Сохранить", response = CommentDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Успешное обновление комментария"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),

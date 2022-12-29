@@ -1,0 +1,52 @@
+package ewp.tasktracker.service.bug;
+
+import ewp.tasktracker.api.dto.bug.BugDto;
+import ewp.tasktracker.api.dto.bug.CreateBugRq;
+import ewp.tasktracker.api.dto.bug.UpdateBugRq;
+import ewp.tasktracker.api.util.PageUtil;
+import ewp.tasktracker.entity.BugEntity;
+import ewp.tasktracker.exception.ResourceNotFoundException;
+import ewp.tasktracker.repository.BugRepository;
+import ewp.tasktracker.service.bug.BugService;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@AllArgsConstructor
+@Service
+public class BugServiceImpl implements BugService {
+    private final BugRepository bugRepository;
+    private final PageUtil pageUtil;
+
+    @Override
+    public BugDto create(CreateBugRq dto) {
+        BugEntity entity = bugRepository.save(dto.toEntity());
+        return new BugDto(entity);
+    }
+
+    @Override
+    public BugDto findById(String id) {
+        return new BugDto(bugRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Bug not found, id: " + id)));
+    }
+
+    @Override
+    public List<BugDto> findAll(Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        return bugRepository.findAll(PageRequest.of(pageNumber,pageSize)).stream().
+                map(BugDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public BugDto update(UpdateBugRq dto) {
+        BugEntity bugEntity = bugRepository.findById(dto.getId()).orElseThrow(() ->
+                new ResourceNotFoundException("Bug not found, id: " + dto.getId()));
+        BugEntity bugEntityNew = dto.updateEntity(bugEntity, dto);
+        BugEntity resultEntity = bugRepository.save(bugEntityNew);
+        return new BugDto(resultEntity);
+    }
+}
+
