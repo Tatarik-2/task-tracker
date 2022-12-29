@@ -42,7 +42,7 @@ public class CommentController {
     }
 
     @PatchMapping
-    @ApiOperation(value = "Сохранить", response = CommentDto.class)
+    @ApiOperation(value = "Обновить", response = CommentDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Успешное обновление комментария"),
             @ApiResponse(code = 500, message = "Внутрення ошибка сервера"),
