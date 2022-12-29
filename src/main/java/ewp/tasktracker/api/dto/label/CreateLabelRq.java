@@ -24,6 +24,6 @@ public class CreateLabelRq {
     private String taskId;
 
     public LabelsEntity toEntity() {
-        return new LabelsEntity();
+        return new LabelsEntity(this.text = text, this.authorId = authorId, this.taskId = taskId);
     }
 }
