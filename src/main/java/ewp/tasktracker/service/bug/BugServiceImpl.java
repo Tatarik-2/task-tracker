@@ -50,8 +50,7 @@ public class BugServiceImpl implements BugService {
 
     @Override
     public BugDto delete(String id) {
-        BugDto bugDto = new BugDto(bugRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Bug not found, id: " + id)));
+        BugDto bugDto = findById(id);
         bugRepository.deleteById(id);
         return bugDto;
     }
