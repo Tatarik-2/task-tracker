@@ -9,10 +9,7 @@ import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.EpicRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,16 +23,14 @@ public class EpicServiceImpl implements EpicService {
     private final PageUtil pageUtil;
 
     @Override
-    public EpicDto saveEpic(CreateEpicRq createEpicRq) {
+    public EpicDto save(CreateEpicRq createEpicRq) {
         EpicEntity epicEntity = epicRepository.save(createEpicRq.toEntity());
         return new EpicDto(epicEntity);
     }
 
     @Override
-    public EpicDto updateEpic(UpdateEpicRq updateEpicRq) {
-        EpicEntity epicFromDb = epicRepository.findById(updateEpicRq.getId()).orElseThrow(() ->
-                new ResourceNotFoundException("Epic not found, id: " + updateEpicRq.getId()));
-        EpicEntity epicToUpdate = updateEpicRq.toEntity(epicFromDb, updateEpicRq);
+    public EpicDto update(UpdateEpicRq updateEpicRq) {
+        EpicEntity epicToUpdate = updateEpicRq.toEntity(getEpicEntityFromRepo(updateEpicRq.getId()), updateEpicRq);
         EpicEntity updatedEpic = epicRepository.save(epicToUpdate);
         return new EpicDto(updatedEpic);
     }
@@ -43,31 +38,31 @@ public class EpicServiceImpl implements EpicService {
 
     @Override
     public List<EpicDto> getListOfEpics(Integer pageSize, Integer pageNumber) {
-        pageSize = pageUtil.pageSizeControl(pageSize);
-        List<EpicDto> listOfEpics = epicRepository.findAll(PageRequest.of(pageNumber, pageSize))
+        Integer checkedPageSize = pageUtil.pageSizeControl(pageSize);
+        List<EpicDto> listOfEpics = epicRepository.findAll(PageRequest.of(pageNumber, checkedPageSize))
                 .stream().map(EpicDto::new).collect(Collectors.toList());
         return listOfEpics;
     }
 
     @Override
-    public EpicDto findEpicById(String id) {
-        return new EpicDto(epicRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Epic not found, id: " + id)));
+    public EpicDto findById(String id) {
+        return new EpicDto(getEpicEntityFromRepo(id));
+    }
+
+    private EpicEntity getEpicEntityFromRepo(String id) {
+        return epicRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Epic not found, id: " + id));
     }
 
 
-//    public PageDto<EpicDto> findEpicByName(String name, Integer pageNumber, Integer pageSize) {
-//        pageSize = pageUtil.pageSizeControl(pageSize);
-//        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-//        Page<EpicEntity> pageOfEpics = epicRepository.findEpicEntityByName(name, pageable);
-//        if (pageOfEpics.isEmpty()) {
-//            throw new ResourceNotFoundException("Epic not found, name: " + name);
-//        } else {
-//            List<EpicDto> epicsDto = pageOfEpics.stream().map(EpicDto::new).collect(Collectors.toList());
-//            PageDto<EpicDto> pageDto = new PageDto<>(epicsDto, pageNumber, pageSize, epicsDto.size());
-//            return pageDto;
-//        }
-//    }
-
-
+    public PageDto<EpicDto> findByName(String name, Integer pageNumber, Integer pageSize) {
+        List<EpicEntity> pageOfEpics = epicRepository.findByName(name);
+        Integer checkedPageSize = pageUtil.pageSizeControl(pageSize);
+        if (pageOfEpics.isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        List<EpicDto> epicsDto = pageOfEpics.stream().map(EpicDto::new).collect(Collectors.toList());
+        PageDto<EpicDto> pageDto = new PageDto<>(epicsDto, pageNumber, checkedPageSize, epicsDto.size());
+        return pageDto;
+    }
 }
