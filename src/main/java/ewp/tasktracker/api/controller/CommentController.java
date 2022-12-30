@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(
@@ -64,5 +65,13 @@ public class CommentController {
     public ResponseEntity<CommentDto> deleteComment(@PathVariable String id) {
         CommentDto response = commentService.deleteById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<CommentDto>> getAll(
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "pageNumber") Integer pageNumber
+    ) {
+        List<CommentDto> comments = commentService.findAll(pageSize, pageNumber);
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 }
