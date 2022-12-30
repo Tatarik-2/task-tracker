@@ -67,6 +67,12 @@ public class CommentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping
+    @ApiOperation(value = "Получить список комментариев", response = CommentDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутрення ошибка сервера")
+    })
     public ResponseEntity<List<CommentDto>> getAll(
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "pageNumber") Integer pageNumber
