@@ -16,6 +16,8 @@ CREATE TABLE epics
     updated_at TIMESTAMP NOT NULL
 );
 
+CREATE INDEX epics_name_idx ON epics(name);
+
 COMMENT ON TABLE epics IS 'Эпики';
 COMMENT ON COLUMN epics.id IS 'Идентификатор';
 COMMENT ON COLUMN epics.name IS 'Наименование';
