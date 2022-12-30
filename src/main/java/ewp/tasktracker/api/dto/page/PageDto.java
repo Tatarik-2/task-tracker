@@ -2,6 +2,7 @@ package ewp.tasktracker.api.dto.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public class PageDto<T> {
     private Integer pageNumber;
     private Integer pageSize;
     private Integer total;
+
 }

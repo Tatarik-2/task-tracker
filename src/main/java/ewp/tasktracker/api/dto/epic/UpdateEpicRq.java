@@ -54,8 +54,9 @@ public class UpdateEpicRq {
         updatedEpicEnity.setAuthorId(updateEpicRq.getAuthorId());
         updatedEpicEnity.setSupersprintId(updateEpicRq.getSupersprintId());
         updatedEpicEnity.setCreatedAt(epicEntityFromDb.getCreatedAt());
-        updatedEpicEnity.setUpdatedAt(LocalDateTime.now());
         return updatedEpicEnity;
     }
+
+
 
 }
