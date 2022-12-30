@@ -54,7 +54,9 @@ public class HistoryServiceImpl implements HistoryService {
     public PageDto<HistoryDto> findHistoryByName(String name, Integer pageSize, Integer pageNumber) {
         List<HistoryEntity> historyEntityList = historyRepository.findByName(name);
         if (historyEntityList.isEmpty()) {
-            throw new ResourceNotFoundException("History not found, name: " + name);
+            PageDto<HistoryDto> pageDto = new PageDto<>();
+            pageDto.setTotal(0);
+            return pageDto;
         }
         pageSize = pageUtil.pageSizeControl(pageSize);
         List<HistoryDto> historyDtoList = historyEntityList.stream().map(HistoryDto::new).collect(Collectors.toList());
