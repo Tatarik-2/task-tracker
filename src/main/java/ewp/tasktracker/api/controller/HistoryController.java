@@ -3,6 +3,7 @@ package ewp.tasktracker.api.controller;
 import ewp.tasktracker.api.dto.history.CreateHistoryRq;
 import ewp.tasktracker.api.dto.history.HistoryDto;
 import ewp.tasktracker.api.dto.history.UpdateHistoryRq;
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.service.history.HistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,5 +69,18 @@ public class HistoryController {
     })
     public ResponseEntity<HistoryDto> updateHistory(@Validated @RequestBody UpdateHistoryRq dto) {
         return ResponseEntity.ok(historyService.updateHistory(dto));
+    }
+
+    @GetMapping("search")
+    @ApiOperation(value = "Поиск истории по названию", response = PageDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Сущность не найдена"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<PageDto<HistoryDto>> getHistoryByName(@RequestParam(value = "filter") String filter,
+                                                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                              @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(historyService.findHistoryByName(filter, pageSize, pageNumber));
     }
 }
