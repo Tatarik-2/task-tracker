@@ -14,4 +14,6 @@ public interface BugService {
     List<BugDto> findAll(Integer pageSize, Integer pageNumber);
 
     BugDto update(UpdateBugRq dto);
+
+    BugDto delete(String id);
 }
