@@ -4,7 +4,9 @@ import ewp.tasktracker.api.dto.history.HistoryDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -21,4 +23,6 @@ public class PageDto<T> {
         pageDto.setTotal(0);
         return pageDto;
     }
+
+
 }
