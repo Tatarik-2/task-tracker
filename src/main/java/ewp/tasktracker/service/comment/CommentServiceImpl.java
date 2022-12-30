@@ -3,9 +3,11 @@ package ewp.tasktracker.service.comment;
 import ewp.tasktracker.api.dto.comment.CommentDto;
 import ewp.tasktracker.api.dto.comment.CreateCommentRq;
 import ewp.tasktracker.api.dto.comment.UpdateCommentRq;
+import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.CommentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
+    private final PageUtil pageUtil;
 
     @Override
     public CommentDto save(CreateCommentRq dto) {
@@ -30,10 +33,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> findAll() {
-        return commentRepository
-                .findAll().stream().map(CommentDto::new)
-                .collect(Collectors.toList());
+    public List<CommentDto> findAll(Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        return commentRepository.findAll(PageRequest.of(pageNumber, pageSize))
+                .stream().map(CommentDto::new).collect(Collectors.toList());
     }
 
     @Override
