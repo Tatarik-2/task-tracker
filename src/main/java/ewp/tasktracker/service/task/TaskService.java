@@ -1,5 +1,6 @@
 package ewp.tasktracker.service.task;
 
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
@@ -11,6 +12,7 @@ public interface TaskService {
     TaskDto create(CreateTaskRq dto);
 
     TaskDto findById(String id);
+    PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber);
 
     TaskDto deleteById(String id);
 

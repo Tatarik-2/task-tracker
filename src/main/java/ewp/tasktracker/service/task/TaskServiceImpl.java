@@ -1,5 +1,6 @@
 package ewp.tasktracker.service.task;
 
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
@@ -32,6 +33,18 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto findById(String id) {
         return new TaskDto(taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found, id: " + id)));
+    }
+
+
+    @Override
+    public PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber) {
+        List<TaskEntity> taskEntityList = taskRepository.findByName(name);
+        if (taskEntityList.isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        List<TaskDto> taskDtoList = taskEntityList.stream().map(TaskDto::new).collect(Collectors.toList());
+        return new PageDto<>(taskDtoList, pageNumber, pageSize, taskDtoList.size());
     }
 
     @Override

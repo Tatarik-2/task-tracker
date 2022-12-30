@@ -1,5 +1,6 @@
 package ewp.tasktracker.api.controller;
 
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
@@ -87,4 +88,17 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+    @GetMapping("search")
+    @ApiOperation(value = "Поиск задачи по названию", response = PageDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 404, message = "Задача не найдена"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<PageDto<TaskDto>> getTaskByName(@RequestParam(value = "filter") String filter,
+                                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                                @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(tasksService.findTaskByName(filter, pageSize, pageNumber));
+    }
 }
