@@ -3,6 +3,7 @@ package ewp.tasktracker.service.history;
 import ewp.tasktracker.api.dto.history.CreateHistoryRq;
 import ewp.tasktracker.api.dto.history.HistoryDto;
 import ewp.tasktracker.api.dto.history.UpdateHistoryRq;
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
@@ -47,5 +48,16 @@ public class HistoryServiceImpl implements HistoryService {
         HistoryEntity historyEntityNew = dto.updateEntity(historyEntityOld, dto);
         HistoryEntity resultEntity = historyRepository.save(historyEntityNew);
         return new HistoryDto(resultEntity);
+    }
+
+    @Override
+    public PageDto<HistoryDto> findHistoryByName(String name, Integer pageSize, Integer pageNumber) {
+        List<HistoryEntity> historyEntityList = historyRepository.findByName(name);
+        if (historyEntityList.isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        List<HistoryDto> historyDtoList = historyEntityList.stream().map(HistoryDto::new).collect(Collectors.toList());
+        return new PageDto<>(historyDtoList, pageNumber, pageSize, historyDtoList.size());
     }
 }

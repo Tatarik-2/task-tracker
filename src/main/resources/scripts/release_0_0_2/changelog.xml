@@ -12,5 +12,5 @@
     <include file="scripts/create_table_labels.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table_projects.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table_epics.sql" relativeToChangelogFile="true"/>
-
+    <include file="scripts/create_table_supersprints.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -3,9 +3,12 @@ package ewp.tasktracker.service.task;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
+import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +16,11 @@ import java.util.stream.Collectors;
 
 
 @Service
+@AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
-    private final TaskRepository taskRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    private final TaskRepository taskRepository;
+    private final PageUtil pageUtil;
 
     @Override
     public TaskDto create(CreateTaskRq dto) {
@@ -33,8 +35,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> findAll() {
-        return taskRepository.findAll().stream().map(TaskDto::new).collect(Collectors.toList());
+    public TaskDto deleteById(String id) {
+        TaskDto task = findById(id);
+        taskRepository.deleteById(id);
+        return task;
     }
 
     @Override
@@ -44,5 +48,11 @@ public class TaskServiceImpl implements TaskService {
         TaskEntity taskEntityNew = dto.updateEntity(taskEntityOne, dto);
         TaskEntity resultEntity = taskRepository.save(taskEntityNew);
         return new TaskDto(resultEntity);
+    }
+
+    public List<TaskDto> findAllTask(Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        return taskRepository.findAll(PageRequest.of(pageNumber, pageSize))
+                .stream().map(TaskDto::new).collect(Collectors.toList());
     }
 }
