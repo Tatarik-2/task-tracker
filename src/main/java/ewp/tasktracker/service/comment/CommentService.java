@@ -9,7 +9,7 @@ import java.util.List;
 public interface CommentService {
     CommentDto save(CreateCommentRq comment);
     CommentDto findById(String id);
-    List<CommentDto> findAll();
+    List<CommentDto> findAll(Integer pageSize, Integer pageNumber);
     CommentDto update(UpdateCommentRq request);
     CommentDto deleteById(String id);
 }
