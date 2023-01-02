@@ -2,6 +2,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.project.CreateProjectRq;
 import ewp.tasktracker.api.dto.project.ProjectDto;
+import ewp.tasktracker.api.dto.project.UpdateProjectRq;
 import ewp.tasktracker.service.project.ProjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,8 +31,9 @@ public class ProjectController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<ProjectDto>> getAll() {
-        List<ProjectDto> projects = projectService.findAll();
+    public ResponseEntity<List<ProjectDto>> getAll(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+                                                   @RequestParam("pageNumber") Integer pageNumber) {
+        List<ProjectDto> projects = projectService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(projects);
     }
 
@@ -54,6 +57,19 @@ public class ProjectController {
     })
     public ResponseEntity<ProjectDto> create(@Validated @RequestBody CreateProjectRq dto) {
         ProjectDto projectDto = projectService.create(dto);
+        return ResponseEntity.ok(projectDto);
+    }
+
+    @PutMapping()
+    @ApiOperation(value = "Редактировать проект", response = ProjectDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса"),
+            @ApiResponse(code = 422, message = "Ошибка валидации"),
+            @ApiResponse(code = 404, message = "Сущность для обновления не найдена")
+    })
+    public ResponseEntity<ProjectDto> update(@Valid @RequestBody UpdateProjectRq dto) {
+        ProjectDto projectDto = projectService.updateProject(dto);
         return ResponseEntity.ok(projectDto);
     }
 }
