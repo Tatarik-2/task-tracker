@@ -3,6 +3,7 @@ package ewp.tasktracker.api.controller;
 
 import ewp.tasktracker.api.dto.sprint.CreateSprintRq;
 import ewp.tasktracker.api.dto.sprint.SprintDto;
+import ewp.tasktracker.api.dto.sprint.UpdateSprintRq;
 import ewp.tasktracker.service.sprint.SprintService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +60,10 @@ public class SprintController {
     public ResponseEntity<SprintDto> delete(@PathVariable String id){
         SprintDto returnDto = sprintService.findById(id);
         sprintService.delete(id);
+        return ResponseEntity.ok(returnDto);
+    }
+    public ResponseEntity<SprintDto> update(@Valid @RequestBody UpdateSprintRq dto){
+        SprintDto returnDto = sprintService.update(dto);
         return ResponseEntity.ok(returnDto);
     }
 }
