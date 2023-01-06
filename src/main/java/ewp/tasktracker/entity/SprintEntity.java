@@ -24,4 +24,12 @@ public class SprintEntity extends BaseEntity {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public SprintEntity(String name, LocalDateTime startAt, LocalDateTime endAt, String authorId, String superSprintId) {
+        this.name = name;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.authorId = authorId;
+        this.superSprintId = superSprintId;
+    }
 }

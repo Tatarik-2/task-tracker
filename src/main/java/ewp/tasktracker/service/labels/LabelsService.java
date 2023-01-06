@@ -7,10 +7,11 @@ import ewp.tasktracker.api.dto.label.UpdateLabelRq;
 import java.util.List;
 
 public interface LabelsService {
+
     LabelsDto save(CreateLabelRq dto);
 
     LabelsDto findById(String id);
-    List<LabelsDto> findAll();
+    List<LabelsDto> findAll(Integer pageSize, Integer pageNumber);
     LabelsDto delete(String id);
 
     LabelsDto update(UpdateLabelRq dto);

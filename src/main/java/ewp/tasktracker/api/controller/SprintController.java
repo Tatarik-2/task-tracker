@@ -1,7 +1,7 @@
 package ewp.tasktracker.api.controller;
 
-import ewp.tasktracker.api.dto.label.CreateLabelRq;
-import ewp.tasktracker.api.dto.label.LabelsDto;
+
+import ewp.tasktracker.api.dto.sprint.CreateSprintRq;
 import ewp.tasktracker.api.dto.sprint.SprintDto;
 import ewp.tasktracker.service.sprint.SprintService;
 import io.swagger.annotations.Api;
@@ -29,12 +29,13 @@ public class SprintController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<SprintDto>> getAll() {
-        return ResponseEntity.ok(sprintService.findAll());
+    public ResponseEntity<List<SprintDto>> getAll(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+                                                  @RequestParam("pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(sprintService.findAll(pageSize, pageNumber));
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Получить метку по id", response = LabelsDto.class)
+    @ApiOperation(value = "Получить метку по id", response = SprintDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 404, message = "Сущность не найдена"),
@@ -45,13 +46,19 @@ public class SprintController {
     }
 
     @PostMapping
-    @ApiOperation(value = "Сохранить спринт", response = LabelsDto.class)
+    @ApiOperation(value = "Сохранить спринт", response = SprintDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 422, message = "Unprocessable Entity - ошибка в валидации полей сущности"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<SprintDto> save(@Valid @RequestBody CreateLabelRq dto){
+    public ResponseEntity<SprintDto> save(@Valid @RequestBody CreateSprintRq dto){
         return ResponseEntity.ok(sprintService.save(dto));
+    }
+
+    public ResponseEntity<SprintDto> delete(@PathVariable String id){
+        SprintDto returnDto = sprintService.findById(id);
+        sprintService.delete(id);
+        return ResponseEntity.ok(returnDto);
     }
 }
