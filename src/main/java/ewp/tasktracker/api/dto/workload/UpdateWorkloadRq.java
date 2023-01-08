@@ -3,6 +3,7 @@ package ewp.tasktracker.api.dto.workload;
 import ewp.tasktracker.entity.common.Status;
 import ewp.tasktracker.entity.WorkloadEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UpdateWorkloadRq {
     @NotNull
     @Length(min = 36, max = 36)
