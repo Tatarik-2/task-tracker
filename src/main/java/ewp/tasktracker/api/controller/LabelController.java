@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.List;
         produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 @Api(value = "task-tracker", tags = {"labels"})
+@Validated
 public class LabelController {
     private final LabelsService labelService;
 

@@ -31,7 +31,7 @@ public class SprintServiceImpl implements SprintService{
     public SprintDto findById(String id) {
 
         return new SprintDto(sprintRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Label not found, id: " + id)));
+                -> new ResourceNotFoundException("Sprint not found, id: " + id)));
     }
 
     @Override

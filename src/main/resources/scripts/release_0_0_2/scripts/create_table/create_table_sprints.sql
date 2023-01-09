@@ -1,8 +1,8 @@
 --liquibase formatted sql
 
 --changeset tokarev-as:create_table_sprints rollbackSplitStatements:true
---comment: Создание таблицы меток задачи
-CREATE TABLE LABELS
+--comment: Создание таблицы спринтов
+CREATE TABLE SPRINTS
 (
     ID         VARCHAR(36) PRIMARY KEY,
     NAME   VARCHAR(128) NOT NULL,
@@ -34,4 +34,4 @@ COMMENT
 ON COLUMN SPRINTS.END_AT IS 'Дата обновления записи';
 
 
--- rollback DROP TABLE LABELS;
+-- rollback DROP TABLE SPRINTS;
