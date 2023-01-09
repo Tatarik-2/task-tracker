@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(HistoryController.class)
-class HistoryControllerTest {
+class HistoryControllerUnitTest {
 
     @Autowired
     private MockMvc mockMvc;
