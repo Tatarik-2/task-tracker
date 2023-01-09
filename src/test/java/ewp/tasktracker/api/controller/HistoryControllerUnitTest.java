@@ -46,16 +46,16 @@ class HistoryControllerUnitTest {
     private static final String AUTHOR_ID = "Test authorId";
     private static final String SPRINT_ID = "Test sprintId";
     private static final String ID = "12345";
-    private static final int pageNumber = 0;
-    private static final int pageSize = 20;
+    private static final int PAGE_NUMBER = 0;
+    private static final int PAGE_SIZE = 20;
 
 
     @Test
     @DisplayName("Positive get all Histories")
     void getAllHistoriesShouldReturnOkStatus() throws Exception {
         List<HistoryDto> dtoList = getListDto();
-        when(service.findAllHistories(pageSize, pageNumber)).thenReturn(dtoList);
-        mockMvc.perform(get("/api/history?pageNumber=" + pageNumber + "&pageSize=" + pageSize))
+        when(service.findAllHistories(PAGE_SIZE, PAGE_NUMBER)).thenReturn(dtoList);
+        mockMvc.perform(get("/api/history?pageNumber=" + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)));
     }
@@ -153,10 +153,10 @@ class HistoryControllerUnitTest {
     @DisplayName("Positive get History by Name")
     void getHistoryByNameShouldReturnOkStatus() throws Exception {
         List<HistoryDto> dtoList = getListDto();
-        when(service.findHistoryByName(NAME, pageSize, pageNumber))
-                .thenReturn(new PageDto<>(dtoList, pageNumber, pageSize, dtoList.size()));
+        when(service.findHistoryByName(NAME, PAGE_SIZE, PAGE_NUMBER))
+                .thenReturn(new PageDto<>(dtoList, PAGE_NUMBER, PAGE_SIZE, dtoList.size()));
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
-                        + pageNumber + "&pageSize=" + pageSize))
+                        + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(3)));
     }
@@ -164,10 +164,10 @@ class HistoryControllerUnitTest {
     @Test
     @DisplayName("Negative get History by Name (empty PageDto)")
     void getHistoryByNameShouldThrowException() throws Exception {
-        when(service.findHistoryByName(NAME, pageSize, pageNumber))
+        when(service.findHistoryByName(NAME, PAGE_SIZE, PAGE_NUMBER))
                 .thenReturn(new PageDto<>(null, null, null, 0));
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
-                        + pageNumber + "&pageSize=" + pageSize))
+                        + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(0)));
     }

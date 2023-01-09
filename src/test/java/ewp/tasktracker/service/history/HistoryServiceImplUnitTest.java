@@ -55,8 +55,8 @@ class HistoryServiceImplUnitTest {
     private static final String SPRINT_ID = "Test sprintId";
     private static final String ID = "12345";
     private static final String TEST_NAME_UPDATED = "New test name";
-    private static final int pageNumber = 0;
-    private static final int pageSize = 20;
+    private static final int PAGE_NUMBER = 0;
+    private static final int PAGE_SIZE = 20;
 
     @Test
     @DisplayName("Positive create History")
@@ -97,9 +97,9 @@ class HistoryServiceImplUnitTest {
     @DisplayName("Positive show all Histories(pagination)")
     void findAllHistoriesShouldReturnListOfEntities() {
         List<HistoryEntity> listOfEntities = List.of(getHistoryEntity(), getHistoryEntity(), getHistoryEntity());
-        when(historyRepository.findAll(PageRequest.of(pageNumber, pageSize))).thenReturn(new PageImpl<>(listOfEntities));
-        when(pageUtil.pageSizeControl(pageSize)).thenReturn(pageSize);
-        List<HistoryDto> dtoList = service.findAllHistories(pageSize, pageNumber);
+        when(historyRepository.findAll(PageRequest.of(PAGE_NUMBER, PAGE_SIZE))).thenReturn(new PageImpl<>(listOfEntities));
+        when(pageUtil.pageSizeControl(PAGE_SIZE)).thenReturn(PAGE_SIZE);
+        List<HistoryDto> dtoList = service.findAllHistories(PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, dtoList.size());
     }
 
@@ -128,8 +128,8 @@ class HistoryServiceImplUnitTest {
     void findHistoryByNameShouldReturnPageDto() {
         List<HistoryEntity> listOfEntities = List.of(getHistoryEntity(), getHistoryEntity(), getHistoryEntity());
         when(historyRepository.findByName(NAME)).thenReturn(listOfEntities);
-        when(pageUtil.pageSizeControl(pageSize)).thenReturn(pageSize);
-        PageDto<HistoryDto> result = service.findHistoryByName(NAME, pageSize, pageNumber);
+        when(pageUtil.pageSizeControl(PAGE_SIZE)).thenReturn(PAGE_SIZE);
+        PageDto<HistoryDto> result = service.findHistoryByName(NAME, PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, result.getTotal());
     }
 
