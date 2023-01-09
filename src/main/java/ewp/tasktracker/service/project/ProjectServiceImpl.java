@@ -20,6 +20,12 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final PageUtil pageUtil;
 
+    private ProjectEntity findProjectById(String id) {
+        ProjectEntity entity = projectRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Project not found, id: " + id));
+        return entity;
+    }
+
     @Override
     public ProjectDto create(CreateProjectRq dto) {
         ProjectEntity entity = projectRepository.save(dto.toEntity());
@@ -28,8 +34,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDto findById(String id) {
-        ProjectEntity entity = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project not found, id: " + id));
-        return new ProjectDto(entity);
+        return new ProjectDto(findProjectById(id));
     }
 
     @Override
@@ -41,9 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDto updateProject(UpdateProjectRq dto) {
-        ProjectEntity projectEntity = projectRepository.findById(dto.getId()).orElseThrow(() ->
-                new ResourceNotFoundException("Project not found, id: " + dto.getId()));
-        ProjectEntity projectEntityNew = dto.updateProject(projectEntity, dto);
+        ProjectEntity projectEntityNew = dto.updateProject(findProjectById(dto.getId()), dto);
         ProjectEntity resultEntity = projectRepository.save(projectEntityNew);
         return new ProjectDto(resultEntity);
     }
