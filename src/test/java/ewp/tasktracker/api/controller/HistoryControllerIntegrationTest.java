@@ -160,7 +160,7 @@ class HistoryControllerIntegrationTest {
     @DisplayName("Positive get History by Name")
     void getHistoryByNameShouldReturnOkStatus() throws Exception {
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
-                + pageNumber + "&pageSize=" + pageSize))
+                        + pageNumber + "&pageSize=" + pageSize))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(3)));
@@ -170,7 +170,7 @@ class HistoryControllerIntegrationTest {
     @DisplayName("Negative get History by Name (empty PageDto)")
     void getHistoryByNameShouldThrowException() throws Exception {
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "1" + "&pageNumber="
-                + pageNumber + "&pageSize=" + pageSize))
+                        + pageNumber + "&pageSize=" + pageSize))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(0)));
