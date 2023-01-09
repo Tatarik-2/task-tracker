@@ -75,7 +75,6 @@ public class HistoryController {
     @ApiOperation(value = "Поиск истории по названию", response = PageDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
-            @ApiResponse(code = 404, message = "Сущность не найдена"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<PageDto<HistoryDto>> getHistoryByName(@RequestParam(value = "filter") String filter,

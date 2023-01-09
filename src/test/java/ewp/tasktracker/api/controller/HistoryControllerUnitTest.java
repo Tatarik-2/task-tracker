@@ -162,13 +162,14 @@ class HistoryControllerUnitTest {
     }
 
     @Test
-    @DisplayName("Negative get History by Name (not found)")
+    @DisplayName("Negative get History by Name (empty PageDto)")
     void getHistoryByNameShouldThrowException() throws Exception {
         when(service.findHistoryByName(NAME, pageSize, pageNumber))
-                .thenThrow(ResourceNotFoundException.class);
+                .thenReturn(new PageDto<>(null, null, null, 0));
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
                         + pageNumber + "&pageSize=" + pageSize))
-                .andExpect(status().is(404));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.total", equalTo(0)));
     }
 
     private CreateHistoryRq getCreateHistoryRq() {
