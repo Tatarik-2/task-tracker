@@ -49,8 +49,8 @@ class HistoryControllerIntegrationTest {
     private static final String AUTHOR_ID = "Test authorId";
     private static final String SPRINT_ID = "Test sprintId";
     private static final String ID = "12345";
-    private static final int pageNumber = 0;
-    private static final int pageSize = 20;
+    private static final int PAGE_NUMBER = 0;
+    private static final int PAGE_SIZE = 20;
 
     @BeforeEach
     void init() {
@@ -66,7 +66,7 @@ class HistoryControllerIntegrationTest {
     @Test
     @DisplayName("Positive get all Histories")
     void getAllHistoriesShouldReturnOkStatus() throws Exception {
-        mockMvc.perform(get("/api/history?pageNumber=" + pageNumber + "&pageSize=" + pageSize))
+        mockMvc.perform(get("/api/history?pageNumber=" + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)));
@@ -160,7 +160,7 @@ class HistoryControllerIntegrationTest {
     @DisplayName("Positive get History by Name")
     void getHistoryByNameShouldReturnOkStatus() throws Exception {
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
-                        + pageNumber + "&pageSize=" + pageSize))
+                        + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(3)));
@@ -170,7 +170,7 @@ class HistoryControllerIntegrationTest {
     @DisplayName("Negative get History by Name (empty PageDto)")
     void getHistoryByNameShouldThrowException() throws Exception {
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "1" + "&pageNumber="
-                        + pageNumber + "&pageSize=" + pageSize))
+                        + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.total", equalTo(0)));

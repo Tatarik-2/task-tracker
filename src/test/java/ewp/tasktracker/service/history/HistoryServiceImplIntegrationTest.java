@@ -39,8 +39,8 @@ class HistoryServiceImplIntegrationTest {
     private static final String AUTHOR_ID = "Test authorId";
     private static final String SPRINT_ID = "Test sprintId";
     private static final String ID = "12345";
-    private static final int pageNumber = 0;
-    private static final int pageSize = 20;
+    private static final int PAGE_NUMBER = 0;
+    private static final int PAGE_SIZE = 20;
 
     @BeforeEach
     void init() {
@@ -84,7 +84,7 @@ class HistoryServiceImplIntegrationTest {
     @Test
     @DisplayName("Positive find all Histories")
     void findAllHistoriesShouldReturnListOfEntities() {
-        List<HistoryDto> dtoList = service.findAllHistories(pageSize, pageNumber);
+        List<HistoryDto> dtoList = service.findAllHistories(PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, dtoList.size());
     }
 
@@ -108,14 +108,14 @@ class HistoryServiceImplIntegrationTest {
     @Test
     @DisplayName("Positive find History by name")
     void findHistoryByNameShouldReturnPageDto() {
-        PageDto<HistoryDto> pageDto = service.findHistoryByName(NAME, pageSize, pageNumber);
+        PageDto<HistoryDto> pageDto = service.findHistoryByName(NAME, PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, pageDto.getTotal());
     }
 
     @Test
     @DisplayName("Positive find History by name (empty PageDto)")
     void findHistoryByNameShouldReturnEmptyPageDto() {
-        PageDto<HistoryDto> pageDto = service.findHistoryByName(NAME_2, pageSize, pageNumber);
+        PageDto<HistoryDto> pageDto = service.findHistoryByName(NAME_2, PAGE_SIZE, PAGE_NUMBER);
         assertEquals(0, pageDto.getTotal());
     }
 
