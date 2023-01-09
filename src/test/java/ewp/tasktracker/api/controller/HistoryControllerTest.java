@@ -37,6 +37,9 @@ class HistoryControllerTest {
     @MockBean
     private HistoryServiceImpl service;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private static final String NAME = "Test name";
     private static final String DESCRIPTION = "Test description";
     private static final String EPIC_ID = "Test epicId";
@@ -50,9 +53,7 @@ class HistoryControllerTest {
     @Test
     @DisplayName("Positive get all Histories")
     void getAllHistoriesShouldReturnOkStatus() throws Exception {
-        List<HistoryDto> dtoList = List.of(new HistoryDto(getCreateHistoryRq().toEntity()),
-                new HistoryDto(getCreateHistoryRq().toEntity()),
-                new HistoryDto(getCreateHistoryRq().toEntity()));
+        List<HistoryDto> dtoList = getListDto();
         when(service.findAllHistories(pageSize, pageNumber)).thenReturn(dtoList);
         mockMvc.perform(get("/api/history?pageNumber=" + pageNumber + "&pageSize=" + pageSize))
                 .andExpect(status().isOk())
@@ -101,7 +102,7 @@ class HistoryControllerTest {
         HistoryDto dto = new HistoryDto(createHistoryRq.toEntity());
         when(service.saveHistory(createHistoryRq)).thenReturn(dto);
         mockMvc.perform(post("/api/history")
-                        .content(new ObjectMapper().writeValueAsString(createHistoryRq))
+                        .content(objectMapper.writeValueAsString(createHistoryRq))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(422));
@@ -115,7 +116,7 @@ class HistoryControllerTest {
         historyDto.setId(ID);
         when(service.updateHistory(updateHistoryRq)).thenReturn(historyDto);
         mockMvc.perform(put("/api/history")
-                        .content(new ObjectMapper().writeValueAsString(updateHistoryRq))
+                        .content(objectMapper.writeValueAsString(updateHistoryRq))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -127,7 +128,7 @@ class HistoryControllerTest {
         UpdateHistoryRq updateHistoryRq = getUpdateHistoryRq();
         when(service.updateHistory(updateHistoryRq)).thenThrow(ResourceNotFoundException.class);
         mockMvc.perform(put("/api/history")
-                        .content(new ObjectMapper().writeValueAsString(updateHistoryRq))
+                        .content(objectMapper.writeValueAsString(updateHistoryRq))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(404));
@@ -142,7 +143,7 @@ class HistoryControllerTest {
         historyDto.setId(ID);
         when(service.updateHistory(updateHistoryRq)).thenReturn(historyDto);
         mockMvc.perform(put("/api/history")
-                        .content(new ObjectMapper().writeValueAsString(updateHistoryRq))
+                        .content(objectMapper.writeValueAsString(updateHistoryRq))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(422));
@@ -151,9 +152,7 @@ class HistoryControllerTest {
     @Test
     @DisplayName("Positive get History by Name")
     void getHistoryByNameShouldReturnOkStatus() throws Exception {
-        List<HistoryDto> dtoList = List.of(new HistoryDto(getCreateHistoryRq().toEntity()),
-                new HistoryDto(getCreateHistoryRq().toEntity()),
-                new HistoryDto(getCreateHistoryRq().toEntity()));
+        List<HistoryDto> dtoList = getListDto();
         when(service.findHistoryByName(NAME, pageSize, pageNumber))
                 .thenReturn(new PageDto<>(dtoList, pageNumber, pageSize, dtoList.size()));
         mockMvc.perform(get("/api/history/search?filter=" + NAME + "&pageNumber="
@@ -195,5 +194,11 @@ class HistoryControllerTest {
         historyRq.setAuthorId(AUTHOR_ID);
         historyRq.setEpicId(EPIC_ID);
         return historyRq;
+    }
+
+    private List<HistoryDto> getListDto() {
+        return List.of(new HistoryDto(getCreateHistoryRq().toEntity()),
+                new HistoryDto(getCreateHistoryRq().toEntity()),
+                new HistoryDto(getCreateHistoryRq().toEntity()));
     }
 }
