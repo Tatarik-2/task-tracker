@@ -39,10 +39,9 @@ public class TaskServiceImpl implements TaskService {
 
 
     @Override
-    public PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber) {
-        String filterForName = null;
-        Object Pageable = null;
-        Page<TaskEntity> taskEntityList = taskRepository.findByName((String) null, (Pageable) null);
+    public PageDto<TaskDto> findTaskByName(String filterForName, Integer pageSize, Integer pageNumber) {
+        Page<TaskEntity> taskEntityList = taskRepository.findByName(filterForName,Pageable.ofSize(pageSize)
+                .withPage(pageNumber));
         if (taskEntityList.isEmpty()) {
             return PageDto.getEmptyPageDto();
         }
