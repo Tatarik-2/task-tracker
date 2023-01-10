@@ -27,6 +27,7 @@ import java.util.List;
 public class SprintController {
 
     private final SprintService sprintService;
+
     @GetMapping
     @ApiOperation(value = "Получить список спринтов", response = SprintDto.class)
     @ApiResponses(value = {
