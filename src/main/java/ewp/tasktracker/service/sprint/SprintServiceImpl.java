@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class SprintServiceImpl implements SprintService{
+public class SprintServiceImpl implements SprintService {
 
-    private final  SprintRepository sprintRepository;
+    private final SprintRepository sprintRepository;
     private final PageUtil pageUtil;
 
 
@@ -27,11 +27,14 @@ public class SprintServiceImpl implements SprintService{
         return new SprintDto(sprintRepository.save(dto.toEntity()));
     }
 
+    private SprintEntity ezFind(String id) {
+        return sprintRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("Sprint not found, id: " + id));
+    }
+
     @Override
     public SprintDto findById(String id) {
-
-        return new SprintDto(sprintRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Sprint not found, id: " + id)));
+        return new SprintDto(ezFind(id));
     }
 
     @Override
@@ -43,16 +46,14 @@ public class SprintServiceImpl implements SprintService{
 
     @Override
     public SprintDto delete(String id) {
-        SprintDto returnDto =  findById(id);
+        SprintDto returnDto = findById(id);
         sprintRepository.deleteById(id);
         return returnDto;
     }
 
     @Override
     public SprintDto update(UpdateSprintRq dto) {
-        SprintEntity sprintEntityFromDB = sprintRepository.findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Sprint not found, id: " + dto.getId()));
-        SprintEntity sprintEntityForUpdate = dto.toEntity(sprintEntityFromDB);
+        SprintEntity sprintEntityForUpdate = dto.toEntity(ezFind(dto.getId()));
         sprintEntityForUpdate.setId(dto.getId());
         return new SprintDto(sprintRepository.save(sprintEntityForUpdate));
     }
