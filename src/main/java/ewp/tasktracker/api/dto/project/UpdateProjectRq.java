@@ -24,15 +24,15 @@ public class UpdateProjectRq {
     @NotBlank
     private String workloadId;
 
-    public ProjectEntity updateProject(ProjectEntity projectEntityFromDB, UpdateProjectRq updateProjectRq) {
+    public ProjectEntity updateProject(ProjectEntity projectEntityFromDB) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(projectEntityFromDB.getId());
         projectEntity.setCreatedAt(projectEntityFromDB.getCreatedAt());
-        projectEntity.setName(updateProjectRq.getName());
-        projectEntity.setDescription(updateProjectRq.getDescription());
-        projectEntity.setStatus(updateProjectRq.getStatus());
-        projectEntity.setAuthorId(updateProjectRq.getAuthorId());
-        projectEntity.setWorkloadId(updateProjectRq.getWorkloadId());
+        projectEntity.setName(this.getName());
+        projectEntity.setDescription(this.getDescription());
+        projectEntity.setStatus(this.getStatus());
+        projectEntity.setAuthorId(this.getAuthorId());
+        projectEntity.setWorkloadId(this.getWorkloadId());
         return projectEntity;
     }
 }

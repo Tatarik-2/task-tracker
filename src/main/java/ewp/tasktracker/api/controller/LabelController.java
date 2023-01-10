@@ -31,8 +31,9 @@ public class LabelController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<LabelsDto>> getAll() {
-        return ResponseEntity.ok(labelService.findAll());
+    public ResponseEntity<List<LabelsDto>> getAll(@RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                  @RequestParam(value = "pageNumber") Integer pageNumber) {
+        return ResponseEntity.ok(labelService.findAll(pageSize, pageNumber));
     }
 
     @GetMapping("/{id}")

@@ -7,6 +7,7 @@
     <include file="scripts/create_table/create_table_comments.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_workloads.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_histories.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_index/create_index_for_table_histories.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_bugs.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_task.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_labels.sql" relativeToChangelogFile="true"/>
