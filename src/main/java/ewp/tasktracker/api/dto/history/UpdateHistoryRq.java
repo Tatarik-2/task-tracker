@@ -32,17 +32,17 @@ public class UpdateHistoryRq {
     @Size(max = 36)
     private String sprintId;
 
-    public HistoryEntity updateEntity(HistoryEntity entityFromDB, UpdateHistoryRq updateHistoryRq) {
+    public HistoryEntity updateEntity(HistoryEntity entityFromDB) {
         HistoryEntity historyEntity = new HistoryEntity();
         historyEntity.setId(entityFromDB.getId());
         historyEntity.setCreatedAt(entityFromDB.getCreatedAt());
-        historyEntity.setName(updateHistoryRq.getName());
-        historyEntity.setDescription(updateHistoryRq.getDescription());
-        historyEntity.setStatus(updateHistoryRq.getStatus());
-        historyEntity.setPriority(updateHistoryRq.getPriority());
-        historyEntity.setEpicId(updateHistoryRq.getEpicId());
-        historyEntity.setAuthorId(updateHistoryRq.getAuthorId());
-        historyEntity.setSprintId(updateHistoryRq.getSprintId());
+        historyEntity.setName(this.getName());
+        historyEntity.setDescription(this.getDescription());
+        historyEntity.setStatus(this.getStatus());
+        historyEntity.setPriority(this.getPriority());
+        historyEntity.setEpicId(this.getEpicId());
+        historyEntity.setAuthorId(this.getAuthorId());
+        historyEntity.setSprintId(this.getSprintId());
         return historyEntity;
     }
 }
