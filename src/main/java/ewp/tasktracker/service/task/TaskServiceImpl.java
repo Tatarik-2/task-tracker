@@ -9,7 +9,9 @@ import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +40,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber) {
-        List<TaskEntity> taskEntityList = taskRepository.findByName(name);
+        String filterForName = null;
+        Object Pageable = null;
+        Page<TaskEntity> taskEntityList = taskRepository.findByName((String) null, (Pageable) null);
         if (taskEntityList.isEmpty()) {
             return PageDto.getEmptyPageDto();
         }
