@@ -45,7 +45,7 @@ public class HistoryServiceImpl implements HistoryService {
     public HistoryDto updateHistory(UpdateHistoryRq dto) {
         HistoryEntity historyEntityOld = historyRepository.findById(dto.getId()).orElseThrow(() ->
                 new ResourceNotFoundException("History not found, id: " + dto.getId()));
-        HistoryEntity historyEntityNew = dto.updateEntity(historyEntityOld, dto);
+        HistoryEntity historyEntityNew = dto.updateEntity(historyEntityOld);
         HistoryEntity resultEntity = historyRepository.save(historyEntityNew);
         return new HistoryDto(resultEntity);
     }
