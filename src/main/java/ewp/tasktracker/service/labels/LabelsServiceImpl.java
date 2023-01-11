@@ -40,7 +40,7 @@ public class LabelsServiceImpl implements LabelsService {
 
     @Override
     public LabelsDto delete(String id) {
-        LabelsDto returnDto = findById(id);
+        LabelsDto returnDto =  findById(id);
         labelsRepository.deleteById(id);
         return returnDto;
     }
