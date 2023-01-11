@@ -14,5 +14,4 @@
     <include file="scripts/create_table/create_table_projects.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_table/create_table_epics.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_index/create_index_for_table_epics.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/create_table/create_table_sprints.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
