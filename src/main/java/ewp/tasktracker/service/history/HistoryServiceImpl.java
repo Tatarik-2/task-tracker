@@ -11,9 +11,7 @@ import ewp.tasktracker.repository.HistoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,6 +57,9 @@ public class HistoryServiceImpl implements HistoryService {
         pageSize = pageUtil.pageSizeControl(pageSize);
         Page<HistoryEntity> historyEntityPage = historyRepository.findByName(name.toUpperCase(),
                 Pageable.ofSize(pageSize).withPage(pageNumber));
+        if (historyEntityPage.getContent().isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
         List<HistoryDto> historyDtoList = historyEntityPage.getContent()
                 .stream().map(HistoryDto::new).collect(Collectors.toList());
         return new PageDto<>(historyDtoList, pageNumber, pageSize, historyDtoList.size());
