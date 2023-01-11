@@ -42,9 +42,6 @@ public class TaskServiceImpl implements TaskService {
     public PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber) {
         Page<TaskEntity> taskEntityList = taskRepository.findByName(name.toUpperCase(),Pageable.ofSize(pageSize)
                 .withPage(pageNumber));
-        if (taskEntityList.isEmpty()) {
-            return PageDto.getEmptyPageDto();
-        }
         pageSize = pageUtil.pageSizeControl(pageSize);
         List<TaskDto> taskDtoList = taskEntityList.stream().map(TaskDto::new).collect(Collectors.toList());
         return new PageDto<>(taskDtoList, pageNumber, pageSize, taskDtoList.size());
