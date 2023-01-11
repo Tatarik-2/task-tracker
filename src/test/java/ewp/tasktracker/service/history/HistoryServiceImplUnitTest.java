@@ -19,8 +19,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -127,7 +129,10 @@ class HistoryServiceImplUnitTest {
     @DisplayName("Positive findByName History")
     void findHistoryByNameShouldReturnPageDto() {
         List<HistoryEntity> listOfEntities = List.of(getHistoryEntity(), getHistoryEntity(), getHistoryEntity());
-        when(historyRepository.findByName(NAME)).thenReturn(listOfEntities);
+        Page<HistoryEntity> historyEntityPage = new PageImpl<>(listOfEntities,
+                Pageable.ofSize(PAGE_SIZE).withPage(PAGE_NUMBER), listOfEntities.size());
+        when(historyRepository.findByName(NAME.toUpperCase(),
+                Pageable.ofSize(PAGE_SIZE).withPage(PAGE_NUMBER))).thenReturn(historyEntityPage);
         when(pageUtil.pageSizeControl(PAGE_SIZE)).thenReturn(PAGE_SIZE);
         PageDto<HistoryDto> result = service.findHistoryByName(NAME, PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, result.getTotal());

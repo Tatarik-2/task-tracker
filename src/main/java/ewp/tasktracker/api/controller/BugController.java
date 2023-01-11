@@ -3,6 +3,7 @@ package ewp.tasktracker.api.controller;
 import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.bug.CreateBugRq;
 import ewp.tasktracker.api.dto.bug.UpdateBugRq;
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.service.bug.BugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,6 +75,19 @@ public class BugController {
         return ResponseEntity.ok(bugDto);
     }
 
+    @GetMapping("/search")
+    @ApiOperation(value = "Поиск бага по имени", response = BugDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<PageDto<BugDto>> getByName(@RequestParam(value = "filter") String filter,
+                                                     @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                     @RequestParam(value = "pageNumber") Integer pageNumber) {
+        PageDto<BugDto> bugDto = bugService.findByName(filter, pageSize, pageNumber);
+        return ResponseEntity.ok(bugDto);
+    }
+
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Удалить баг", response = BugDto.class)
     @ApiResponses({
@@ -81,7 +95,7 @@ public class BugController {
             @ApiResponse(code = 404, message = "Сущность не найдена"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<BugDto> delete(@PathVariable String id){
+    public ResponseEntity<BugDto> delete(@PathVariable String id) {
         BugDto bugDto = bugService.delete(id);
         return ResponseEntity.ok(bugDto);
     }

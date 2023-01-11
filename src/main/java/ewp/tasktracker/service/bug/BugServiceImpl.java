@@ -3,12 +3,15 @@ package ewp.tasktracker.service.bug;
 import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.bug.CreateBugRq;
 import ewp.tasktracker.api.dto.bug.UpdateBugRq;
+import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.util.PageUtil;
 import ewp.tasktracker.entity.BugEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.BugRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +36,15 @@ public class BugServiceImpl implements BugService {
     }
 
     @Override
+    public PageDto<BugDto> findByName(String name, Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        Page<BugEntity> bugEntityList = bugRepository.findByName(name.toUpperCase(),
+                Pageable.ofSize(pageSize).withPage(pageNumber));
+        List<BugDto> bugDtoList = bugEntityList.stream().map(BugDto::new).collect(Collectors.toList());
+        return new PageDto<>(bugDtoList, pageNumber, pageSize, bugDtoList.size());
+    }
+
+    @Override
     public List<BugDto> findAll(Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
         return bugRepository.findAll(PageRequest.of(pageNumber, pageSize)).stream().
@@ -43,7 +55,7 @@ public class BugServiceImpl implements BugService {
     public BugDto update(UpdateBugRq dto) {
         BugEntity bugEntity = bugRepository.findById(dto.getId()).orElseThrow(() ->
                 new ResourceNotFoundException("Bug not found, id: " + dto.getId()));
-        BugEntity bugEntityNew = dto.updateEntity(bugEntity, dto);
+        BugEntity bugEntityNew = dto.updateEntity(bugEntity);
         BugEntity resultEntity = bugRepository.save(bugEntityNew);
         return new BugDto(resultEntity);
     }
