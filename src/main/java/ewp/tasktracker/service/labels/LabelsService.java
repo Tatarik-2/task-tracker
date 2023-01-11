@@ -7,6 +7,7 @@ import ewp.tasktracker.api.dto.label.UpdateLabelRq;
 import java.util.List;
 
 public interface LabelsService {
+
     LabelsDto save(CreateLabelRq dto);
 
     LabelsDto findById(String id);
