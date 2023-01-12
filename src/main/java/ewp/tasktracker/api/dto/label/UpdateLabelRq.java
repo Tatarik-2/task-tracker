@@ -2,16 +2,19 @@ package ewp.tasktracker.api.dto.label;
 
 import ewp.tasktracker.entity.LabelsEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UpdateLabelRq {
     @NotNull
     @Length(min = 36, max = 36)
@@ -27,10 +30,13 @@ public class UpdateLabelRq {
 
 
     public LabelsEntity toEntity(LabelsEntity labelsEntityFromDB) {
-        return new LabelsEntity(
-                this.text,
-                this.taskId,
-                this.authorId
-        );
+        LabelsEntity labelsEntity = new LabelsEntity();
+        labelsEntity.setId(id);
+        labelsEntity.setTaskId(taskId);
+        labelsEntity.setAuthorId(authorId);
+        labelsEntity.setText(text);
+        labelsEntity.setCreatedAt(labelsEntityFromDB.getCreatedAt());
+        labelsEntity.setUpdatedAt(LocalDateTime.now());
+        return labelsEntity;
     }
 }
