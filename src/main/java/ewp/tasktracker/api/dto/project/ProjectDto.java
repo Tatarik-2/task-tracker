@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectDto {
+    private String id;
     private String name;
     private String description;
     private Status status;
@@ -18,6 +19,7 @@ public class ProjectDto {
     private String workloadId;
 
     public ProjectDto(ProjectEntity projectEntity) {
+        this.id = projectEntity.getId();
         this.name = projectEntity.getName();
         this.description = projectEntity.getDescription();
         this.status = projectEntity.getStatus();
