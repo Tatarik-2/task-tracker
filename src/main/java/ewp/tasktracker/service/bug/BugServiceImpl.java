@@ -38,9 +38,12 @@ public class BugServiceImpl implements BugService {
     @Override
     public PageDto<BugDto> findByName(String name, Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
-        Page<BugEntity> bugEntityList = bugRepository.findByName(name.toUpperCase(),
+        Page<BugEntity> bugEntityPage = bugRepository.findByName(name.toUpperCase(),
                 Pageable.ofSize(pageSize).withPage(pageNumber));
-        List<BugDto> bugDtoList = bugEntityList.stream().map(BugDto::new).collect(Collectors.toList());
+        if (bugEntityPage.isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        List<BugDto> bugDtoList = bugEntityPage.stream().map(BugDto::new).collect(Collectors.toList());
         return new PageDto<>(bugDtoList, pageNumber, pageSize, bugDtoList.size());
     }
 
