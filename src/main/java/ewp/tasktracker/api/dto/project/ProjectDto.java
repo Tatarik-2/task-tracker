@@ -1,11 +1,11 @@
 package ewp.tasktracker.api.dto.project;
 
 import ewp.tasktracker.entity.ProjectEntity;
+import ewp.tasktracker.entity.common.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,11 +13,9 @@ import java.time.LocalDateTime;
 public class ProjectDto {
     private String name;
     private String description;
-    private String status;
+    private Status status;
     private String authorId;
     private String workloadId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updateAt;
 
     public ProjectDto(ProjectEntity projectEntity) {
         this.name = projectEntity.getName();
