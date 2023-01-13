@@ -30,6 +30,7 @@ spring:
     username: admin
     password: admin
     instance:
+      prefer-ip: true
       metadata:
         user.name: ${spring.security.user.name}
         user.password: ${spring.security.user.password}
