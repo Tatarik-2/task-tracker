@@ -1,15 +1,19 @@
 package ewp.tasktracker.service.task;
 
+import ewp.tasktracker.api.dto.history.HistoryDto;
 import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
 import ewp.tasktracker.api.util.PageUtil;
+import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,12 +42,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber) {
-        List<TaskEntity> taskEntityList = taskRepository.findByName(name);
-        if (taskEntityList.isEmpty()) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        Page<TaskEntity> taskEntityPage = taskRepository.findByName(name.toUpperCase(),
+                Pageable.ofSize(pageSize).withPage(pageNumber));
+        if (taskEntityPage.getContent().isEmpty()) {
             return PageDto.getEmptyPageDto();
         }
-        pageSize = pageUtil.pageSizeControl(pageSize);
-        List<TaskDto> taskDtoList = taskEntityList.stream().map(TaskDto::new).collect(Collectors.toList());
+        List<TaskDto> taskDtoList = taskEntityPage.stream().map(TaskDto::new).collect(Collectors.toList());
         return new PageDto<>(taskDtoList, pageNumber, pageSize, taskDtoList.size());
     }
 

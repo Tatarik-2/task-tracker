@@ -93,7 +93,6 @@ public class TaskController {
     @ApiOperation(value = "Поиск задачи по названию", response = PageDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Успешный ответ"),
-            @ApiResponse(code = 404, message = "Задача не найдена"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<PageDto<TaskDto>> getTaskByName(@RequestParam(value = "filter") String filter,

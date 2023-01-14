@@ -36,17 +36,17 @@ public class UpdateBugRq {
     @Size(max = 36)
     private String sprintId;
 
-    public BugEntity updateEntity(BugEntity entityFromDB, UpdateBugRq updateBugRq) {
+    public BugEntity updateEntity(BugEntity entityFromDB) {
         BugEntity bugEntity = new BugEntity();
         bugEntity.setId(entityFromDB.getId());
-        bugEntity.setName(updateBugRq.getName());
-        bugEntity.setDescription(updateBugRq.getDescription());
-        bugEntity.setStatus(updateBugRq.getStatus());
-        bugEntity.setPriority(updateBugRq.getPriority());
-        bugEntity.setHistoryId(updateBugRq.getHistoryId());
-        bugEntity.setAuthorId(updateBugRq.getAuthorId());
-        bugEntity.setAssigneeId(updateBugRq.getAssigneeId());
-        bugEntity.setSprintId(updateBugRq.getSprintId());
+        bugEntity.setName(this.getName());
+        bugEntity.setDescription(this.getDescription());
+        bugEntity.setStatus(this.getStatus());
+        bugEntity.setPriority(this.getPriority());
+        bugEntity.setHistoryId(this.getHistoryId());
+        bugEntity.setAuthorId(this.getAuthorId());
+        bugEntity.setAssigneeId(this.getAssigneeId());
+        bugEntity.setSprintId(this.getSprintId());
         bugEntity.setCreatedAt(entityFromDB.getCreatedAt());
         return bugEntity;
     }
