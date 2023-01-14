@@ -1,12 +1,10 @@
 package ewp.tasktracker.service.task;
 
-import ewp.tasktracker.api.dto.history.HistoryDto;
 import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
 import ewp.tasktracker.api.util.PageUtil;
-import ewp.tasktracker.entity.HistoryEntity;
 import ewp.tasktracker.entity.TaskEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.TaskRepository;
@@ -31,6 +29,12 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto create(CreateTaskRq dto) {
         TaskEntity entity = taskRepository.save(dto.toEntity());
         return new TaskDto(entity);
+    }
+
+    @Override
+    public TaskDto saveTask(CreateTaskRq dto) {
+        TaskEntity taskEntity = taskRepository.save(dto.toEntity());
+        return new TaskDto(taskEntity);
     }
 
     @Override
