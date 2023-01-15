@@ -11,6 +11,8 @@ public interface TaskService {
 
     TaskDto create(CreateTaskRq dto);
 
+    TaskDto saveTask(CreateTaskRq dto);
+
     TaskDto findById(String id);
     PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber);
 
