@@ -52,7 +52,7 @@ public class LabelControllerIntegrationTests {
     }
 
     @Test
-    @DisplayName("Positive get all Histories")
+    @DisplayName("Positive get all Labels")
     void getAllHistoriesShouldReturnOkStatus() throws Exception {
         mockMvc.perform(get("/api/labels?pageNumber=" + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andDo(print())
