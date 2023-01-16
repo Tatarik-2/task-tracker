@@ -14,6 +14,8 @@ public interface BugService {
 
     PageDto<BugDto> findByName(String name, Integer pageSize, Integer pageNumber);
 
+    List<BugDto> findByAssigneeId(String assigneeId);
+
     List<BugDto> findAll(Integer pageSize, Integer pageNumber);
 
     BugDto update(UpdateBugRq dto);

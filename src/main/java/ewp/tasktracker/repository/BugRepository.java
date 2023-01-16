@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface BugRepository extends JpaRepository<BugEntity, String> {
     @Query("SELECT bg FROM bugs bg WHERE UPPER(bg.name) LIKE %?1%")
     Page<BugEntity> findByName(String name, Pageable pageable);
+
+    List<BugEntity> findByAssigneeId(String assigneeId);
 }

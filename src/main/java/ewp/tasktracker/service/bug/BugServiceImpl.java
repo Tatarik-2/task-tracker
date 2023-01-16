@@ -48,6 +48,12 @@ public class BugServiceImpl implements BugService {
     }
 
     @Override
+    public List<BugDto> findByAssigneeId(String assigneeId) {
+        return bugRepository.findByAssigneeId(assigneeId).stream().
+                map(BugDto::new).collect(Collectors.toList());
+    }
+
+    @Override
     public List<BugDto> findAll(Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
         return bugRepository.findAll(PageRequest.of(pageNumber, pageSize)).stream().
