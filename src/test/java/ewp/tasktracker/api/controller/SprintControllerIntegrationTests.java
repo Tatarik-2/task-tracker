@@ -64,7 +64,7 @@ public class SprintControllerIntegrationTests {
 
     @Test
     @DisplayName("Positive get all Sprints")
-    void getAllHistoriesShouldReturnOkStatus() throws Exception {
+    void getAllSprintsShouldReturnOkStatus() throws Exception {
         mockMvc.perform(get("/api/sprint?pageNumber=" + PAGE_NUMBER + "&pageSize=" + PAGE_SIZE))
                 .andDo(print())
                 .andExpect(status().isOk())
