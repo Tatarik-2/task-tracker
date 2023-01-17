@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class SprintServiceUnitTests {
     @MockBean
-    private SprintRepository historyRepository;
+    private SprintRepository sprintRepository;
     @MockBean
     private PageUtil pageUtil;
     @Mock
@@ -59,7 +59,7 @@ public class SprintServiceUnitTests {
     void saveSprintShouldReturnEntity() {
         SprintEntity testEntity = getSprintEntity();
         when(requestCreate.toEntity()).thenReturn(testEntity);
-        when(historyRepository.save(any())).thenReturn(testEntity);
+        when(sprintRepository.save(any())).thenReturn(testEntity);
         SprintDto result = service.save(requestCreate);
         Assertions.assertAll(
                 () -> assertEquals(SprintDto.class, result.getClass()),
@@ -73,7 +73,7 @@ public class SprintServiceUnitTests {
     @Test
     @DisplayName("Positive findById Sprint")
     void findByIdSprintShouldReturnEntity() {
-        when(historyRepository.findById(ID)).thenReturn(Optional.of(getSprintEntity()));
+        when(sprintRepository.findById(ID)).thenReturn(Optional.of(getSprintEntity()));
         SprintDto result = service.findById(ID);
         assertEquals(ID, result.getId());
     }
@@ -81,15 +81,15 @@ public class SprintServiceUnitTests {
     @Test
     @DisplayName("Negative findById Sprint")
     void findByIdSprintShouldThrowException() {
-        when(historyRepository.findById(ID)).thenReturn(Optional.empty());
+        when(sprintRepository.findById(ID)).thenReturn(Optional.empty());
         assertThrows(ResourceNotFoundException.class, () -> service.findById(ID));
     }
 
     @Test
-    @DisplayName("Positive show all Histories(pagination)")
-    void findAllHistoriesShouldReturnListOfEntities() {
+    @DisplayName("Positive show all Sprints(pagination)")
+    void findAllSprintsShouldReturnListOfEntities() {
         List<SprintEntity> listOfEntities = List.of(getSprintEntity(), getSprintEntity(), getSprintEntity());
-        when(historyRepository.findAll(PageRequest.of(PAGE_NUMBER, PAGE_SIZE))).thenReturn(new PageImpl<>(listOfEntities));
+        when(sprintRepository.findAll(PageRequest.of(PAGE_NUMBER, PAGE_SIZE))).thenReturn(new PageImpl<>(listOfEntities));
         when(pageUtil.pageSizeControl(PAGE_SIZE)).thenReturn(PAGE_SIZE);
         List<SprintDto> dtoList = service.findAll(PAGE_SIZE, PAGE_NUMBER);
         assertEquals(3, dtoList.size());
@@ -98,12 +98,12 @@ public class SprintServiceUnitTests {
     @Test
     @DisplayName("Positive update Sprint")
     void updateSprintShouldReturnEntity() {
-        SprintEntity historyEntityFromDB = getSprintEntity();
+        SprintEntity sprintEntityFromDB = getSprintEntity();
         SprintEntity updatedEntity = getSprintEntity();
         updatedEntity.setName(NAME_2);
         when(requestUpdate.getId()).thenReturn(ID);
-        when(historyRepository.findById(ID)).thenReturn(Optional.of(historyEntityFromDB));
-        when(historyRepository.save(any())).thenReturn(updatedEntity);
+        when(sprintRepository.findById(ID)).thenReturn(Optional.of(sprintEntityFromDB));
+        when(sprintRepository.save(any())).thenReturn(updatedEntity);
         SprintDto result = service.update(requestUpdate);
         assertEquals(NAME_2, result.getName());
     }
@@ -111,7 +111,7 @@ public class SprintServiceUnitTests {
     @Test
     @DisplayName("Negative update Sprint")
     void updateSprintShouldThrowException() {
-        when(historyRepository.findById(ID)).thenReturn(Optional.empty());
+        when(sprintRepository.findById(ID)).thenReturn(Optional.empty());
         assertThrows(ResourceNotFoundException.class, () -> service.update(requestUpdate));
     }
 
