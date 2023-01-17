@@ -43,10 +43,10 @@ public class SprintControllerIntegrationTests {
     private ObjectMapper objectMapper;
     private static final String NAME = "SPRINT";
     private static final String NAME_2 = "SPRINT2";
-    private static final String SUPERSPRINTID = "123412341234";
-    private static final String AUTHORID = "123412341234";
-    private static final LocalDateTime STARTAT = LocalDateTime.MIN;
-    private static final LocalDateTime ENDAT = LocalDateTime.MAX;
+    private static final String SUPERSPRINT_ID = "123412341234";
+    private static final String AUTHOR_ID = "123412341234";
+    private static final LocalDateTime START_AT = LocalDateTime.MIN;
+    private static final LocalDateTime END_AT = LocalDateTime.MAX;
     private static final String ID = "123412341234";
     private static final int PAGE_NUMBER = 0;
     private static final int PAGE_SIZE = 20;
@@ -158,10 +158,10 @@ public class SprintControllerIntegrationTests {
     private CreateSprintRq getCreateSprintRq() {
         CreateSprintRq createSprintRq = new CreateSprintRq();
         createSprintRq.setName(NAME);
-        createSprintRq.setSuperSprintId(SUPERSPRINTID);
-        createSprintRq.setAuthorId(AUTHORID);
-        createSprintRq.setStartAt(STARTAT);
-        createSprintRq.setEndAt(ENDAT);
+        createSprintRq.setSuperSprintId(SUPERSPRINT_ID);
+        createSprintRq.setAuthorId(AUTHOR_ID);
+        createSprintRq.setStartAt(START_AT);
+        createSprintRq.setEndAt(END_AT);
 
         return createSprintRq;
     }
@@ -170,10 +170,10 @@ public class SprintControllerIntegrationTests {
         UpdateSprintRq sprintRq = new UpdateSprintRq();
         sprintRq.setId(ID);
         sprintRq.setName(NAME);
-        sprintRq.setSuperSprintId(SUPERSPRINTID);
-        sprintRq.setAuthorId(AUTHORID);
-        sprintRq.setStartAt(STARTAT);
-        sprintRq.setEndAt(ENDAT);
+        sprintRq.setSuperSprintId(SUPERSPRINT_ID);
+        sprintRq.setAuthorId(AUTHOR_ID);
+        sprintRq.setStartAt(START_AT);
+        sprintRq.setEndAt(END_AT);
         return sprintRq;
     }
 

@@ -46,10 +46,10 @@ public class SprintServiceUnitTests {
 
     private static final String NAME = "SPRINT";
     private static final String NAME_2 = "SPRINT2";
-    private static final String SUPERSPRINTID = "123412341234";
-    private static final String AUTHORID = "123412341234";
-    private static final LocalDateTime STARTAT = LocalDateTime.MIN;
-    private static final LocalDateTime ENDAT = LocalDateTime.MAX;
+    private static final String SUPERSPRINT_ID = "123412341234";
+    private static final String AUTHOR_ID = "123412341234";
+    private static final LocalDateTime START_AT = LocalDateTime.MIN;
+    private static final LocalDateTime END_AT = LocalDateTime.MAX;
     private static final String ID = "123412341234";
     private static final int PAGE_NUMBER = 0;
     private static final int PAGE_SIZE = 20;
@@ -64,8 +64,8 @@ public class SprintServiceUnitTests {
         Assertions.assertAll(
                 () -> assertEquals(SprintDto.class, result.getClass()),
                 () -> assertEquals(NAME, result.getName()),
-                () -> assertEquals(SUPERSPRINTID, result.getSuperSprintId()),
-                () -> assertEquals(AUTHORID, result.getAuthorId()),
+                () -> assertEquals(SUPERSPRINT_ID, result.getSuperSprintId()),
+                () -> assertEquals(AUTHOR_ID, result.getAuthorId()),
                 () -> assertEquals(ID, result.getId())
         );
     }
@@ -118,10 +118,10 @@ public class SprintServiceUnitTests {
     private SprintEntity getSprintEntity() {
         SprintEntity entity = new SprintEntity();
         entity.setName(NAME);
-        entity.setSuperSprintId(SUPERSPRINTID);
-        entity.setAuthorId(AUTHORID);
-        entity.setStartAt(STARTAT);
-        entity.setEndAt(ENDAT);
+        entity.setSuperSprintId(SUPERSPRINT_ID);
+        entity.setAuthorId(AUTHOR_ID);
+        entity.setStartAt(START_AT);
+        entity.setEndAt(END_AT);
         entity.setId(ID);
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
