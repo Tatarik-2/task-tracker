@@ -14,4 +14,5 @@ public interface BugRepository extends JpaRepository<BugEntity, String> {
 
     @Query("SELECT b FROM bugs b WHERE UPPER(b.assigneeId) LIKE %?1%")
     Page<BugEntity> findByAssigneeId(String assigneeId, Pageable pageable);
+
 }
