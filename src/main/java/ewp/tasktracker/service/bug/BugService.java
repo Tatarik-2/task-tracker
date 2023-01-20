@@ -5,6 +5,7 @@ import ewp.tasktracker.api.dto.bug.CreateBugRq;
 import ewp.tasktracker.api.dto.bug.UpdateBugRq;
 import ewp.tasktracker.api.dto.page.PageDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BugService {
@@ -13,6 +14,8 @@ public interface BugService {
     BugDto findById(String id);
 
     PageDto<BugDto> findByName(String name, Integer pageSize, Integer pageNumber);
+
+    PageDto<BugDto> findByProjectId(String projectId, LocalDateTime dateTime, Integer pageSize, Integer pageNumber);
 
     PageDto<BugDto> findByAssigneeId(String assigneeId, Integer pageSize, Integer pageNumber);
 
