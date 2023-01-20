@@ -31,7 +31,7 @@ public class ProjectController {
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
-    public ResponseEntity<List<ProjectDto>> getAll(@RequestParam (value = "pageSize", required = false) Integer pageSize,
+    public ResponseEntity<List<ProjectDto>> getAll(@RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam("pageNumber") Integer pageNumber) {
         List<ProjectDto> projects = projectService.findAll(pageSize, pageNumber);
         return ResponseEntity.ok(projects);
