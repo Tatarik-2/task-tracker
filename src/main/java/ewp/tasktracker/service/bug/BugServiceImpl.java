@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,18 @@ public class BugServiceImpl implements BugService {
     public PageDto<BugDto> findByName(String name, Integer pageSize, Integer pageNumber) {
         pageSize = pageUtil.pageSizeControl(pageSize);
         Page<BugEntity> bugEntityPage = bugRepository.findByName(name.toUpperCase(),
+                Pageable.ofSize(pageSize).withPage(pageNumber));
+        if (bugEntityPage.isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        List<BugDto> bugDtoList = bugEntityPage.stream().map(BugDto::new).collect(Collectors.toList());
+        return new PageDto<>(bugDtoList, pageNumber, pageSize, bugDtoList.size());
+    }
+
+    @Override
+    public PageDto<BugDto> findByProjectId(String projectId, LocalDateTime dateTime, Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        Page<BugEntity> bugEntityPage = bugRepository.findByProjectId(projectId, dateTime,
                 Pageable.ofSize(pageSize).withPage(pageNumber));
         if (bugEntityPage.isEmpty()) {
             return PageDto.getEmptyPageDto();
