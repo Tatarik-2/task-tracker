@@ -25,10 +25,9 @@ public class NotificationKafkaProducerService {
         this.objectMapper = objectMapper;
     }
 
-    public String sendMessage(Notification notification) throws JsonProcessingException {
+    public void sendMessage(Notification notification) throws JsonProcessingException {
         String notificationAsMessage = objectMapper.writeValueAsString(notification);
         kafkaTemplate.send(topic, notificationAsMessage);
         log.info("task-tracker kafka produced {}", notificationAsMessage);
-        return "message sent";
     }
 }
