@@ -9,7 +9,9 @@ import ewp.tasktracker.entity.EpicEntity;
 import ewp.tasktracker.exception.ResourceNotFoundException;
 import ewp.tasktracker.repository.EpicRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,12 +58,13 @@ public class EpicServiceImpl implements EpicService {
 
 
     public PageDto<EpicDto> findByName(String name, Integer pageNumber, Integer pageSize) {
-        List<EpicEntity> pageOfEpics = epicRepository.findByName(name);
+        Page<EpicEntity> pageOfEpics = epicRepository.findByName(name.toUpperCase(),
+                Pageable.ofSize(pageSize).withPage(pageNumber));
         Integer checkedPageSize = pageUtil.pageSizeControl(pageSize);
-        if (pageOfEpics.isEmpty()) {
+        if (pageOfEpics.getContent().isEmpty()) {
             return PageDto.getEmptyPageDto();
         }
-        List<EpicDto> epicsDto = pageOfEpics.stream().map(EpicDto::new).collect(Collectors.toList());
+        List<EpicDto> epicsDto = pageOfEpics.getContent().stream().map(EpicDto::new).collect(Collectors.toList());
         PageDto<EpicDto> pageDto = new PageDto<>(epicsDto, pageNumber, checkedPageSize, epicsDto.size());
         return pageDto;
     }
