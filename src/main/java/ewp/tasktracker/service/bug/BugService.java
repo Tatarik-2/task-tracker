@@ -17,6 +17,8 @@ public interface BugService {
 
     PageDto<BugDto> findByProjectId(String projectId, LocalDateTime dateTime, Integer pageSize, Integer pageNumber);
 
+    PageDto<BugDto> findByAssigneeId(String assigneeId, Integer pageSize, Integer pageNumber);
+
     List<BugDto> findAll(Integer pageSize, Integer pageNumber);
 
     BugDto update(UpdateBugRq dto);
