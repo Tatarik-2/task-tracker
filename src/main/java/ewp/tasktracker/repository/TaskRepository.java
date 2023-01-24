@@ -15,7 +15,7 @@ public interface TaskRepository extends JpaRepository<TaskEntity, String> {
     @Query("SELECT ts FROM tasks ts WHERE UPPER(ts.name) LIKE %?1%")
     Page<TaskEntity> findByName(String filterForName, Pageable pageable);
 
-    List<TaskEntity> findByAssigneeIdIgnoreCaseStartingWith(String filterForAssigneeId);
+    Page<TaskEntity> findByAssigneeIdStartingWith(String filterForAssigneeId, Pageable pageable);
 
 
 }

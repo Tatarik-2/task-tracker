@@ -58,10 +58,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> findTaskByAssigneeId(String assigneeId) {
-        List<TaskEntity> listOfTaskEntity = taskRepository.findByAssigneeIdIgnoreCaseStartingWith(assigneeId);
-        List<TaskDto> listOfTaskDto = listOfTaskEntity.stream().map(TaskDto::new).collect(Collectors.toList());
-        return listOfTaskDto;
+    public PageDto<TaskDto> findTaskByAssigneeId(String assigneeId, Integer pageSize, Integer pageNumber) {
+        pageSize = pageUtil.pageSizeControl(pageSize);
+        Page<TaskEntity> pageOfTaskEntity = taskRepository.findByAssigneeIdStartingWith(assigneeId,
+                Pageable.ofSize(pageSize).withPage(pageNumber));
+        if (pageOfTaskEntity.getContent().isEmpty()) {
+            return PageDto.getEmptyPageDto();
+        }
+        List<TaskDto> listOfTaskDto = pageOfTaskEntity.stream().map(TaskDto::new).collect(Collectors.toList());
+        PageDto<TaskDto> newPageDto = new PageDto<>(listOfTaskDto, pageNumber, pageSize, listOfTaskDto.size());
+        return newPageDto;
     }
 
     @Override
