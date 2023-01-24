@@ -15,7 +15,11 @@ spring:
     default-schema: "task_tracker"
   jackson:
     default-property-inclusion: non_null
-
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   security:
     user:
       name: admin
@@ -43,3 +47,6 @@ management:
 task-tracker:
   page-default-size: 20
   page-max-size: 40
+
+topic:
+  name: user-notifications
