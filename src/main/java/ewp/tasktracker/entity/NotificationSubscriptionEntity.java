@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity(name = "notification_subscriptions")
 public class NotificationSubscriptionEntity extends BaseEntity {
-    private String name;
     private String userId;
     private String projectId;
     private LocalDateTime createdAt;
