@@ -17,5 +17,7 @@
     <include file="scripts/create_index/create_index_for_table_epics.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_index/create_index_for_table_tasks.sql" relativeToChangelogFile="true"/>
     <include file="scripts/create_index/create_index_for_table_histories.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_index/create_index_for_table_bugs.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/create_index/create_index_assigneeId_for_table_bugs.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
