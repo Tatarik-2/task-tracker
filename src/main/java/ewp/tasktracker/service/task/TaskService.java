@@ -16,6 +16,7 @@ public interface TaskService {
 
     TaskDto findById(String id);
     PageDto<TaskDto> findTaskByName(String name, Integer pageSize, Integer pageNumber);
+    PageDto<TaskDto> findTaskByAssigneeId(String assigneeId, Integer pageSize, Integer pageNumber);
 
     TaskDto deleteById(String id);
 
