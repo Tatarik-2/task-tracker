@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,19 @@ public class TaskController {
     public ResponseEntity<List<TaskDto>> getAllTask(@RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                     @RequestParam(value = "pageNumber") Integer pageNumber) {
         return ResponseEntity.ok(tasksService.findAllTask(pageSize, pageNumber));
+    }
+
+    @GetMapping("/getByUserId/{userId}")
+    @ApiOperation(value = "Получить список задач, назначенных на пользователя", response = TaskDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<PageDto<TaskDto>> getTasksByAssigneeId(@PathVariable String userId,
+                                                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                              @RequestParam(value = "pageNumber") Integer pageNumber) {
+        PageDto<TaskDto> listOfAssignee = tasksService.findTaskByAssigneeId(userId, pageSize, pageNumber);
+        return ResponseEntity.ok(listOfAssignee);
     }
 
     @GetMapping("/{id}")
@@ -96,8 +110,8 @@ public class TaskController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<PageDto<TaskDto>> getTaskByName(@RequestParam(value = "filter") String filter,
-                                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                                                @RequestParam(value = "pageNumber") Integer pageNumber) {
+                                                          @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                          @RequestParam(value = "pageNumber") Integer pageNumber) {
         return ResponseEntity.ok(tasksService.findTaskByName(filter, pageSize, pageNumber));
     }
 }
