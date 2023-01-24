@@ -18,4 +18,8 @@ public interface BugRepository extends JpaRepository<BugEntity, String> {
     @Query("SELECT b FROM bugs b JOIN histories h on b.historyId = h.id " +
             "JOIN epics e ON h.epicId = e.id WHERE e.projectId = ?1 AND b.createdAt > ?2")
     Page<BugEntity> findByProjectId(String projectId, LocalDateTime date, Pageable pageable);
+
+    @Query("SELECT b FROM bugs b WHERE UPPER(b.assigneeId) LIKE %?1%")
+    Page<BugEntity> findByAssigneeId(String assigneeId, Pageable pageable);
+
 }

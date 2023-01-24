@@ -19,7 +19,7 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   security:
     user:
       name: admin
@@ -59,3 +59,6 @@ scheduler:
   interval: PT05S
   id: notificationscheduler
   start-time: 2007-12-03T10:15:30
+
+topic:
+  name: user-notifications

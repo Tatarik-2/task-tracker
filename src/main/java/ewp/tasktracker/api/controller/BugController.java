@@ -88,6 +88,19 @@ public class BugController {
         return ResponseEntity.ok(bugDto);
     }
 
+    @GetMapping("/find-by-assignee-id/{assigneeId}")
+    @ApiOperation(value = "Получить список багов назначенных на пользователя", response = BugDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<PageDto<BugDto>> getByAssigneeId(@PathVariable String assigneeId,
+                                                           @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                           @RequestParam(value = "pageNumber") Integer pageNumber) {
+        PageDto<BugDto> bugDto = bugService.findByAssigneeId(assigneeId, pageSize, pageNumber);
+        return ResponseEntity.ok(bugDto);
+    }
+
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Удалить баг", response = BugDto.class)
     @ApiResponses({

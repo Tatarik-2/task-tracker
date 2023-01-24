@@ -38,7 +38,7 @@ ON COLUMN BUGS.ASSIGNEE_ID IS 'Идентификатор исполнителя
 COMMENT
 ON COLUMN BUGS.SPRINT_ID IS 'Идентификатор спринта';
 COMMENT
-ON COLUMN BUGS.CREATED_AT IS 'Дата создания записа';
+ON COLUMN BUGS.CREATED_AT IS 'Дата создания записи';
 COMMENT
 ON COLUMN BUGS.UPDATED_AT IS 'Дата обновления записи';
 
