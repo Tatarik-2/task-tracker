@@ -5,6 +5,7 @@ import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.api.dto.task.UpdateTaskRq;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TaskService {
@@ -21,5 +22,8 @@ public interface TaskService {
     TaskDto updateTask(UpdateTaskRq dto);
 
     List<TaskDto> findAllTask(Integer pageSize, Integer pageNumber);
+
+
+    PageDto<TaskDto> findByProjectId(String projectId, LocalDateTime dateTime, Integer pageSize, Integer pageNumber);
 }
 
