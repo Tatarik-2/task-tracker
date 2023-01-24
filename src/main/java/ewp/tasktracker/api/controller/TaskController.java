@@ -40,6 +40,17 @@ public class TaskController {
         return ResponseEntity.ok(tasksService.findAllTask(pageSize, pageNumber));
     }
 
+    @GetMapping("/getByUserId/{userId}")
+    @ApiOperation(value = "Получить список задач, назначенных на пользователя", response = TaskDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Успешный ответ"),
+            @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
+    })
+    public ResponseEntity<List<TaskDto>> getTasksByAssigneeId(@PathVariable String userId) {
+        List<TaskDto> listOfAssignee = tasksService.findTaskByAssigneeId(userId);
+        return ResponseEntity.ok(listOfAssignee);
+    }
+
     @GetMapping("/{id}")
     @ApiOperation(value = "Получить задачу по id", response = TaskDto.class)
     @ApiResponses(value = {
@@ -96,8 +107,8 @@ public class TaskController {
             @ApiResponse(code = 500, message = "Внутренняя ошибка сервиса")
     })
     public ResponseEntity<PageDto<TaskDto>> getTaskByName(@RequestParam(value = "filter") String filter,
-                                                                @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                                                @RequestParam(value = "pageNumber") Integer pageNumber) {
+                                                          @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                                          @RequestParam(value = "pageNumber") Integer pageNumber) {
         return ResponseEntity.ok(tasksService.findTaskByName(filter, pageSize, pageNumber));
     }
 }

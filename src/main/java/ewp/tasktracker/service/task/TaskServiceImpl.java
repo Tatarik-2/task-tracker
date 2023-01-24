@@ -1,5 +1,6 @@
 package ewp.tasktracker.service.task;
 
+import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.page.PageDto;
 import ewp.tasktracker.api.dto.task.CreateTaskRq;
 import ewp.tasktracker.api.dto.task.TaskDto;
@@ -54,6 +55,13 @@ public class TaskServiceImpl implements TaskService {
         }
         List<TaskDto> taskDtoList = taskEntityPage.stream().map(TaskDto::new).collect(Collectors.toList());
         return new PageDto<>(taskDtoList, pageNumber, pageSize, taskDtoList.size());
+    }
+
+    @Override
+    public List<TaskDto> findTaskByAssigneeId(String assigneeId) {
+        List<TaskEntity> listOfTaskEntity = taskRepository.findByAssigneeId(assigneeId);
+        List<TaskDto> listOfTaskDto = listOfTaskEntity.stream().map(TaskDto::new).collect(Collectors.toList());
+        return listOfTaskDto;
     }
 
     @Override
