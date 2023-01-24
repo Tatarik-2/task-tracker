@@ -59,7 +59,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDto> findTaskByAssigneeId(String assigneeId) {
-        List<TaskEntity> listOfTaskEntity = taskRepository.findByAssigneeId(assigneeId);
+        List<TaskEntity> listOfTaskEntity = taskRepository.findByAssigneeIdIgnoreCaseStartingWith(assigneeId);
         List<TaskDto> listOfTaskDto = listOfTaskEntity.stream().map(TaskDto::new).collect(Collectors.toList());
         return listOfTaskDto;
     }
