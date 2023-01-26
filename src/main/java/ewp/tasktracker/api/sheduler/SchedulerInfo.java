@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "schedulerinfo")
+@Entity(name = "scheduler_info")
 public class SchedulerInfo {
     @Id
     private String id;
