@@ -1,6 +1,8 @@
 package ewp.tasktracker.api.sheduler;
 
+import ewp.tasktracker.api.dto.bug.BugDto;
 import ewp.tasktracker.api.dto.notificationSubscription.NotificationSubscriptionDto;
+import ewp.tasktracker.api.dto.task.TaskDto;
 import ewp.tasktracker.config.SchedulerProperties;
 import ewp.tasktracker.config.TaskTrackerProperties;
 import ewp.tasktracker.entity.common.Notification;
@@ -15,7 +17,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -34,15 +35,6 @@ public class NotificationScheduler {
     @Scheduled(fixedRateString = "${task-tracker.scheduler.interval}")
     public void findNewEntities() {
         int pageNumber = taskProperties.getPageDefaultNumber();
-        List<NotificationSubscriptionDto> notificationSubscriptionDtos = new ArrayList<>();
-        List<NotificationSubscriptionDto> notificationSubscription = notificationSubscriptionService
-                .findAll(taskProperties.getPageMaxSize(), pageNumber);
-        while (!notificationSubscription.isEmpty()) {
-            notificationSubscriptionDtos.addAll(notificationSubscription);
-            notificationSubscription = notificationSubscriptionService
-                    .findAll(taskProperties.getPageMaxSize(), ++pageNumber);
-        }
-
         LocalDateTime createdAfter;
 
         SchedulerInfo schedulerInfo = service.findById(schedulerProperties.getId());
@@ -50,26 +42,39 @@ public class NotificationScheduler {
                 LocalDateTime.parse(schedulerProperties.getStartTime())
                 : schedulerInfo.getLastTriggerTime();
 
-        notificationSubscriptionDtos.forEach(notificationSubscriptionDto ->
-        {
-            if (bugService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
-                    , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber()).getItems() != null) {
-                bugService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
-                                , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber())
-                        .getItems().forEach(bugDto -> producerService.send(
-                                new Notification(notificationSubscriptionDto.getUserId(),
-                                        "Новый баг: " + bugDto.getName())));
-            }
-            if (taskService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
-                    , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber()).getItems() != null) {
-                taskService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
-                                , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber())
-                        .getItems().forEach(taskDto -> producerService.send(
-                                new Notification(notificationSubscriptionDto.getUserId(),
-                                        "Новая задача: " + taskDto.getName())));
-            }
-        });
+        List<NotificationSubscriptionDto> notificationSubscriptionDtos = notificationSubscriptionService
+                .findAll(taskProperties.getPageMaxSize(), pageNumber);
+
+        while (!notificationSubscriptionDtos.isEmpty()) {
+            notificationSubscriptionDtos.forEach(notificationSubscriptionDto -> {
+                List<BugDto> bugDtoPageDto = findBugs(notificationSubscriptionDto, createdAfter);
+                List<TaskDto> taskDtoPageDto = findTasks(notificationSubscriptionDto, createdAfter);
+                if (bugDtoPageDto != null) {
+                    bugDtoPageDto.forEach(dto -> producerService.send(
+                            new Notification(notificationSubscriptionDto.getUserId(),
+                                    "Новый баг: " + dto.getName())));
+                }
+                if (taskDtoPageDto != null) {
+                    taskDtoPageDto.forEach(dto -> producerService.send(
+                            new Notification(notificationSubscriptionDto.getUserId(),
+                                    "Новая задача: " + dto.getName())));
+                }
+            });
+
+            notificationSubscriptionDtos = notificationSubscriptionService
+                    .findAll(taskProperties.getPageMaxSize(), ++pageNumber);
+        }
 
         service.save(new SchedulerInfo(schedulerProperties.getId(), LocalDateTime.now()));
+    }
+
+    public List<BugDto> findBugs(NotificationSubscriptionDto notificationSubscriptionDto, LocalDateTime createdAfter) {
+        return bugService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
+                , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber()).getItems();
+    }
+
+    public List<TaskDto> findTasks(NotificationSubscriptionDto notificationSubscriptionDto, LocalDateTime createdAfter) {
+        return taskService.findByProjectId(notificationSubscriptionDto.getProjectId(), createdAfter
+                , taskProperties.getPageMaxSize(), taskProperties.getPageDefaultNumber()).getItems();
     }
 }

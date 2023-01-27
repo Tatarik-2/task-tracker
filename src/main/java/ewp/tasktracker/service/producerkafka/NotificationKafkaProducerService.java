@@ -30,7 +30,7 @@ public class NotificationKafkaProducerService {
         try {
             notificationAsMessage = objectMapper.writeValueAsString(notification);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("task-tracker kafka produced {}", e);
         }
         kafkaTemplate.send(topic, notificationAsMessage);
         log.info("task-tracker kafka produced {}", notificationAsMessage);
